@@ -731,7 +731,7 @@
           <div class="mapa">
             <!-- Sustituye la URL del iframe por el mapa real de tu negocio -->
             <iframe
-              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3035.8539500000003!2d-3.627!3d40.55!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xd422fb2f0000000%3APasteleria!2s[Nombre%20de%20la%20Pasteleria]!5e0!3m2!1ses!2ses!4v0000000000"
+              src="https://www.google.com/maps?q=El+Rinc%C3%B3n+de+mama+In%C3%A9s@40.5486016,-3.6461236&hl=es&z=18&output=embed"
               loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
           </div>
         </div>
@@ -768,6 +768,9 @@
   <footer>
     © <span id="year"></span> El  Rincón De Mamá Inés. Todos los derechos reservados.
   </footer>
+
+  <!-- EmailJS (cliente) -->
+  <script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
 
   <script>
     // Sistema de Carrito
@@ -861,17 +864,42 @@
       }
     });
 
-    // Botón hacer pedido
+    // Botón hacer pedido — enviar carrito directamente por EmailJS
     document.getElementById('btnPedido').addEventListener('click', () => {
       if (carrito.length === 0) {
         alert('Tu cesta está vacía');
         return;
       }
+
       const total = carrito.reduce((sum, item) => sum + (item.precio * item.cantidad), 0);
-      const resumen = carrito.map(item => `${item.producto} (${item.tamaño}) x${item.cantidad}`).join(', ');
-      alert(`Resumen del pedido:\n${resumen}\n\nTotal: ${total.toFixed(2)}€\n\nTe redirigiremos al formulario de contacto.`);
-      document.getElementById('carritoModal').classList.remove('activo');
-      document.getElementById('contacto').scrollIntoView({ behavior: 'smooth' });
+      const totalItems = carrito.reduce((sum, item) => sum + item.cantidad, 0);
+      const carritoResumen = carrito.map(item => `${item.producto} (${item.tamaño}) x${item.cantidad} — ${(item.precio * item.cantidad).toFixed(2)}€`).join('\n');
+      const ahora = new Date().toLocaleString('es-ES');
+
+      const templateParams = {
+        fecha_pedido: ahora,
+        total_items: totalItems,
+        detalles_pedido: carritoResumen,
+        total: total.toFixed(2),
+        mensaje: 'Nuevo pedido recibido desde el carrito flotante'
+      };
+
+      // Inicializa EmailJS (sustituir 'TU_PUBLIC_KEY')
+      try { emailjs.init('qpGS2g8D8-boYYkk4'); } catch (err) { console.warn('EmailJS init:', err); }
+
+      // Envía el email (sustituir 'TU_SERVICE_ID' y 'TU_TEMPLATE_ID')
+      emailjs.send('service_kh8hj9j', 'template_1wxoraq', templateParams)
+        .then(() => {
+          alert('Pedido enviado correctamente. Nos pondremos en contacto para confirmar.');
+          carrito = [];
+          guardarCarrito();
+          actualizarCarrito();
+          document.getElementById('carritoModal').classList.remove('activo');
+        })
+        .catch((error) => {
+          console.error('Error enviando pedido:', error);
+          alert('No se pudo enviar el pedido. Inténtalo más tarde o contacta por teléfono.');
+        });
     });
 
     // Tabs de carta
@@ -907,11 +935,56 @@
     // Año actual en el footer
     document.getElementById('year').textContent = new Date().getFullYear();
 
-    // Manejo sencillo del formulario
+    // Manejo del formulario: enviar pedido por EmailJS
     document.getElementById('pedidoForm').addEventListener('submit', (e) => {
       e.preventDefault();
-      alert('Gracias por tu mensaje. Nos pondremos en contacto contigo para confirmar tu pedido.');
-      e.target.reset();
+      const form = e.target;
+      const nombre = form.nombre.value.trim();
+      const email = form.email.value.trim();
+      const telefono = form.telefono.value.trim();
+      const descripcion = form.descripcion.value.trim();
+
+      if (!email || !nombre) {
+        alert('Por favor, completa tu nombre y correo.');
+        return;
+      }
+
+      const carritoResumen = carrito.length ? carrito.map(item => `${item.producto} (${item.tamaño}) x${item.cantidad} — ${(item.precio * item.cantidad).toFixed(2)}€`).join('\n') : 'Cesta vacía';
+      const total = carrito.reduce((sum, item) => sum + (item.precio * item.cantidad), 0).toFixed(2);
+      const totalItems = carrito.reduce((sum, item) => sum + item.cantidad, 0);
+      const ahora = new Date().toLocaleString('es-ES');
+
+      const templateParams = {
+        fecha_pedido: ahora,
+        cliente_nombre: nombre,
+        cliente_email: email,
+        cliente_telefono: telefono,
+        cliente_comentarios: descripcion,
+        total_items: totalItems,
+        detalles_pedido: carritoResumen,
+        total: total,
+        mensaje: 'Nuevo pedido recibido desde el formulario de contacto'
+      };
+
+      // Inicializa EmailJS (sustituye 'TU_PUBLIC_KEY' por tu clave pública)
+      try {
+        emailjs.init('TqpGS2g8D8-boYYkk4');
+      } catch (err) {
+        console.warn('EmailJS init:', err);
+      }
+
+      // Envía el email (sustituye 'TU_SERVICE_ID' y 'TU_TEMPLATE_ID')
+      emailjs.send('service_kh8hj9j', 'template_1wxoraq', templateParams)
+        .then(() => {
+          alert('Pedido enviado correctamente. Te contactaremos para confirmar.');
+          form.reset();
+          carrito = [];
+          guardarCarrito();
+          actualizarCarrito();
+        }, (error) => {
+          console.error('Error EmailJS:', error);
+          alert('No se pudo enviar el pedido. Inténtalo más tarde o contacta por teléfono.');
+        });
     });
 
     // Inicializar carrito
@@ -919,3 +992,4 @@
   </script>
 </body>
 </html>
+
