@@ -14,649 +14,17 @@
   <!-- Tipografías Google (estilo artesanal y elegante) -->
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&family=Nunito:wght@300;400;600&display=swap" rel="stylesheet">
 
-  <style>
-    :root {
-      --color-fondo: #fff9f5;
-      --color-principal: #f7c9c9;
-      --color-secundario: #f3e1c8;
-      --color-oscuro: #5c3b34;
-      --color-acento: #e7a8a1;
-      --color-borde: #f0d7cf;
-      --sombra-suave: 0 10px 25px rgba(0,0,0,0.06);
-      --radio: 16px;
-      --trans: all 0.4s ease;
-    }
-
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
-
-    body {
-      font-family: 'Nunito', system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-      background: linear-gradient(180deg, #fffdf9 0%, #ffecec 50%, #fff9f5 100%);
-      color: var(--color-oscuro);
-      scroll-behavior: smooth;
-    }
-
-    img {
-      max-width: 100%;
-      display: block;
-    }
-
-    a {
-      text-decoration: none;
-      color: inherit;
-    }
-
-    /* Layout general */
-    header {
-      position: sticky;
-      top: 0;
-      z-index: 999;
-      backdrop-filter: blur(10px);
-      background: rgba(255,249,245,0.9);
-      border-bottom: 1px solid rgba(240,215,207,0.7);
-    }
-
-    .contenedor {
-      width: min(1100px, 92vw);
-      margin: 0 auto;
-    }
-
-    .nav {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 0.65rem 0;
-    }
-
-    .logo {
-      font-family: 'Playfair Display', serif;
-      font-size: 1.4rem;
-      font-weight: 700;
-      letter-spacing: 0.03em;
-      color: var(--color-oscuro);
-    }
-
-    .logo span {
-      font-size: 0.85rem;
-      font-weight: 500;
-      display: block;
-      color: #a77b6b;
-    }
-
-    .nav-links {
-      display: flex;
-      gap: 1.2rem;
-      font-size: 0.95rem;
-    }
-
-    .nav-links a {
-      position: relative;
-      padding-bottom: 0.15rem;
-    }
-
-    .nav-links a::after {
-      content: "";
-      position: absolute;
-      left: 0;
-      bottom: 0;
-      width: 0;
-      height: 2px;
-      background: var(--color-acento);
-      transition: width 0.25s ease;
-    }
-
-    .nav-links a:hover::after {
-      width: 100%;
-    }
-
-    /* Botón principal */
-    .btn {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      background: linear-gradient(135deg, #f7c9c9, #f3e1c8);
-      color: var(--color-oscuro);
-      padding: 0.65rem 1.6rem;
-      border-radius: 999px;
-      border: 1px solid rgba(255,255,255,0.7);
-      box-shadow: var(--sombra-suave);
-      font-weight: 600;
-      font-size: 0.95rem;
-      cursor: pointer;
-      gap: 0.35rem;
-      transition: var(--trans);
-    }
-
-    .btn span {
-      font-size: 1.1rem;
-      transform: translateX(0);
-      transition: transform 0.3s ease;
-    }
-
-    .btn:hover span {
-      transform: translateX(3px);
-    }
-
-    .btn-outline {
-      background: transparent;
-      border: 1px solid var(--color-borde);
-      box-shadow: none;
-    }
-
-    .btn-outline:hover {
-      background: rgba(255,255,255,0.7);
-    }
-
-    /* Hero / Inicio */
-    #inicio {
-      padding: 3.8rem 0 3rem;
-    }
-
-    .hero {
-      display: grid;
-      grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr);
-      gap: 2.8rem;
-      align-items: center;
-    }
-
-    .hero-texto h1 {
-      font-family: 'Playfair Display', serif;
-      font-size: clamp(2.4rem, 3vw, 3rem);
-      line-height: 1.1;
-      margin-bottom: 0.8rem;
-    }
-
-    .hero-texto h1 span {
-      color: #c07a6f;
-    }
-
-    .hero-texto p {
-      font-size: 0.98rem;
-      line-height: 1.7;
-      max-width: 32rem;
-      margin-bottom: 1.4rem;
-    }
-
-    .hero-badges {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.6rem;
-      margin-bottom: 1.4rem;
-      font-size: 0.8rem;
-    }
-
-    .badge {
-      padding: 0.35rem 0.9rem;
-      border-radius: 999px;
-      background: rgba(255,255,255,0.9);
-      border: 1px dashed rgba(230,182,170,0.9);
-      display: inline-flex;
-      align-items: center;
-      gap: 0.35rem;
-    }
-
-    .badge span {
-      font-size: 0.85rem;
-    }
-
-    .hero-botones {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.7rem;
-      align-items: center;
-    }
-
-    .hero-imagen {
-      position: relative;
-      padding: 1rem;
-    }
-
-    .hero-card {
-      background: rgba(255,255,255,0.95);
-      border-radius: 32px;
-      padding: 1.1rem;
-      box-shadow: var(--sombra-suave);
-      border: 1px solid rgba(255,255,255,0.9);
-      position: relative;
-      overflow: hidden;
-    }
-
-    .hero-card::before {
-      content: "";
-      position: absolute;
-      inset: 0;
-      background: radial-gradient(circle at 0% 0%, rgba(255,255,255,0.7) 0, transparent 55%);
-      opacity: 0.8;
-      pointer-events: none;
-    }
-
-    .hero-card-header {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      margin-bottom: 0.7rem;
-    }
-
-    .hero-card-header h2 {
-      font-family: 'Playfair Display', serif;
-      font-size: 1.1rem;
-    }
-
-    .hero-chip {
-      background: #ffe6df;
-      border-radius: 999px;
-      padding: 0.25rem 0.7rem;
-      font-size: 0.75rem;
-      display: flex;
-      align-items: center;
-      gap: 0.35rem;
-    }
-
-    .hero-chip-dot {
-      width: 7px;
-      height: 7px;
-      border-radius: 50%;
-      background: #ff7b7b;
-      box-shadow: 0 0 0 5px rgba(255,123,123,0.25);
-    }
-
-    .hero-productos {
-      display: grid;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: 0.5rem;
-      margin-bottom: 0.8rem;
-    }
-
-    .mini-card {
-      background: #fffaf8;
-      border-radius: 16px;
-      padding: 0.5rem;
-      border: 1px solid rgba(243,225,200,0.8);
-      font-size: 0.75rem;
-      text-align: center;
-    }
-
-    .mini-card strong {
-      display: block;
-      margin-bottom: 0.2rem;
-    }
-
-    .hero-card-footer {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      font-size: 0.78rem;
-      color: #8c6d62;
-    }
-
-    .hero-badge-dest {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.3rem;
-      background: #f7e7ff;
-      padding: 0.3rem 0.7rem;
-      border-radius: 999px;
-      font-size: 0.75rem;
-    }
-
-    /* Secciones genéricas */
-    section {
-      padding: 3.2rem 0;
-    }
-
-    section h2 {
-      font-family: 'Playfair Display', serif;
-      font-size: 1.8rem;
-      text-align: center;
-      margin-bottom: 0.4rem;
-    }
-
-    section p.section-subtitle {
-      text-align: center;
-      font-size: 0.95rem;
-      color: #85635a;
-      margin-bottom: 2rem;
-    }
-
-    /* Carta / Menú */
-    #carta {
-      background: radial-gradient(circle at top, #ffe8eb 0, #fff9f5 55%);
-    }
-
-    .tabs-menu {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 0.5rem;
-      margin-bottom: 1.6rem;
-      font-size: 0.85rem;
-    }
-
-    .tab-btn {
-      padding: 0.4rem 1rem;
-      border-radius: 999px;
-      border: 1px solid rgba(230,182,170,0.8);
-      background: rgba(255,255,255,0.9);
-      cursor: pointer;
-      transition: var(--trans);
-    }
-
-    .tab-btn.active {
-      background: linear-gradient(135deg, #f7c9c9, #f3e1c8);
-      border-color: transparent;
-      font-weight: 600;
-      box-shadow: var(--sombra-suave);
-    }
-
-    .menu-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-      gap: 1.4rem;
-    }
-
-    .menu-card {
-      background: rgba(255,255,255,0.95);
-      border-radius: var(--radio);
-      padding: 1rem 1.1rem;
-      box-shadow: var(--sombra-suave);
-      border: 1px solid rgba(240,215,207,0.9);
-      position: relative;
-      overflow: hidden;
-    }
-
-    .menu-card.destacado::before {
-      content: "★ Más pedido";
-      position: absolute;
-      top: 0.7rem;
-      right: 0.9rem;
-      font-size: 0.7rem;
-      background: #ffe8a3;
-      border-radius: 999px;
-      padding: 0.15rem 0.6rem;
-      color: #5c3b20;
-    }
-
-    .menu-titulo {
-      font-weight: 700;
-      margin-bottom: 0.3rem;
-      font-size: 0.98rem;
-    }
-
-    .menu-etiqueta {
-      font-size: 0.75rem;
-      color: #a57262;
-      margin-bottom: 0.35rem;
-    }
-
-    .menu-precios {
-      font-size: 0.8rem;
-      color: #6f4e43;
-      margin-top: 0.5rem;
-    }
-
-    .menu-precios span {
-      display: inline-block;
-      margin-right: 0.35rem;
-      margin-bottom: 0.15rem;
-      padding: 0.18rem 0.45rem;
-      border-radius: 999px;
-      background: #fff4ef;
-      border: 1px solid rgba(243,225,200,0.8);
-    }
-
-    .menu-detalle {
-      font-size: 0.86rem;
-      line-height: 1.5;
-    }
-
-    .etiqueta-mes {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.25rem;
-      font-size: 0.8rem;
-      color: #b25b4d;
-      margin-top: 0.3rem;
-    }
-
-    /* SOBRE NOSOTROS */
-    #sobre {
-      background: #fff9f5;
-    }
-
-    .sobre-grid {
-      display: grid;
-      grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr);
-      gap: 2rem;
-      align-items: center;
-    }
-
-    .sobre-texto p {
-      font-size: 0.95rem;
-      line-height: 1.7;
-      margin-bottom: 1rem;
-    }
-
-    .sobre-valores {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
-      gap: 0.8rem;
-      margin-top: 0.7rem;
-    }
-
-    .sobre-valor {
-      background: rgba(255,255,255,0.9);
-      border-radius: 16px;
-      padding: 0.8rem 0.9rem;
-      border: 1px dashed rgba(230,182,170,0.9);
-      font-size: 0.86rem;
-    }
-
-    .sobre-valor strong {
-      display: block;
-      margin-bottom: 0.2rem;
-    }
-
-    .sobre-galeria {
-      display: grid;
-      grid-template-columns: repeat(2, minmax(0,1fr));
-      gap: 0.7rem;
-    }
-
-    .galeria-item {
-      border-radius: 18px;
-      overflow: hidden;
-      background: linear-gradient(135deg, #f7c9c9, #f3e1c8);
-      height: 140px;
-      position: relative;
-    }
-
-    .galeria-item::after {
-      content: "";
-      position: absolute;
-      inset: 0;
-      background-image: linear-gradient(135deg, rgba(255,255,255,0.4) 0, transparent 40%, rgba(0,0,0,0.04) 100%);
-      mix-blend-mode: soft-light;
-    }
-
-    .galeria-item span {
-      position: absolute;
-      left: 12px;
-      bottom: 10px;
-      font-size: 0.8rem;
-      color: #4e2b24;
-      font-weight: 600;
-    }
-
-    /* PEDIDOS Y CONTACTO */
-    #contacto {
-      background: radial-gradient(circle at top, #ffe3d6 0, #fff9f5 55%);
-    }
-
-    .contacto-grid {
-      display: grid;
-      grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr);
-      gap: 2rem;
-      align-items: start;
-    }
-
-    form {
-      background: rgba(255,255,255,0.96);
-      border-radius: var(--radio);
-      padding: 1.3rem 1.4rem;
-      box-shadow: var(--sombra-suave);
-      border: 1px solid rgba(240,215,207,0.9);
-    }
-
-    .campo {
-      margin-bottom: 0.9rem;
-    }
-
-    label {
-      display: block;
-      font-size: 0.82rem;
-      margin-bottom: 0.25rem;
-      color: #7a5950;
-    }
-
-    input, textarea {
-      width: 100%;
-      padding: 0.55rem 0.7rem;
-      border-radius: 10px;
-      border: 1px solid rgba(230,182,170,0.9);
-      font-family: inherit;
-      font-size: 0.9rem;
-      background: #fffdfb;
-    }
-
-    textarea {
-      min-height: 90px;
-      resize: vertical;
-    }
-
-    .nota-form {
-      font-size: 0.78rem;
-      color: #9b756b;
-      margin-top: 0.3rem;
-    }
-
-    .contacto-info {
-      font-size: 0.9rem;
-    }
-
-    .info-bloque {
-      margin-bottom: 1rem;
-    }
-
-    .info-bloque h3 {
-      font-size: 0.98rem;
-      margin-bottom: 0.2rem;
-    }
-
-    .mapa {
-      margin-top: 0.5rem;
-      border-radius: 14px;
-      overflow: hidden;
-      height: 200px;
-      background: #ffe8e0;
-      border: 1px solid rgba(240,215,207,0.9);
-    }
-
-    .mapa iframe {
-      width: 100%;
-      height: 100%;
-      border: 0;
-    }
-
-    .rrss {
-      display: flex;
-      gap: 0.6rem;
-      margin-top: 0.5rem;
-    }
-
-    .rrss a {
-      width: 32px;
-      height: 32px;
-      border-radius: 999px;
-      background: #fff;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      box-shadow: var(--sombra-suave);
-      font-size: 1.1rem;
-    }
-
-    footer {
-      text-align: center;
-      padding: 1.6rem 0 1.2rem;
-      font-size: 0.8rem;
-      color: #8f7066;
-    }
-
-    /* Animaciones suaves */
-    .fade-up {
-      opacity: 0;
-      transform: translateY(10px);
-      transition: opacity 0.7s ease, transform 0.7s ease;
-    }
-    .fade-up.visible {
-      opacity: 1;
-      transform: translateY(0);
-    }
-
-    /* Responsive */
-    @media (max-width: 900px) {
-      .hero, .sobre-grid, .contacto-grid {
-        grid-template-columns: 1fr;
-      }
-      .hero {
-        text-align: center;
-      }
-      .hero-texto p {
-        margin-left: auto;
-        margin-right: auto;
-      }
-      .hero-badges, .hero-botones {
-        justify-content: center;
-      }
-      .hero-imagen {
-        order: -1;
-      }
-    }
-
-    @media (max-width: 720px) {
-      .nav {
-        flex-direction: column;
-        gap: 0.4rem;
-      }
-      .nav-links {
-        font-size: 0.9rem;
-      }
-      section {
-        padding: 2.5rem 0;
-      }
-      .menu-grid {
-        grid-template-columns: 1fr;
-      }
-    }
-
-    @media (max-width: 480px) {
-      .nav-links {
-        flex-wrap: wrap;
-        justify-content: center;
-      }
-      .hero-card {
-        border-radius: 24px;
-      }
-    }
-  </style>
+  <!-- Estilos -->
+  <link rel="stylesheet" href="styles.css">
 </head>
 <body>
 
   <!-- HEADER -->
+    <!-- BANNER -->
+    <div class="banner">
+      <img src="C:\Users\marko\Desktop\$$$$\automatizacion de procesos\Rincon_de_mama_ines\img\logo.png" alt="Banner El Rincón De Mamá Inés" class="banner-img">
+    </div>
+
   <header>
     <div class="contenedor nav">
       <div class="logo">
@@ -751,130 +119,175 @@
         <div class="menu-grid">
           <!-- Ejemplo de producto; adapta los nombres y precios a tu carta real -->
           <article class="menu-card destacado">
-            <div class="menu-titulo">Roscón original</div>
-            <div class="menu-etiqueta">Clásico, esponjoso y aromático.</div>
-            <p class="menu-detalle">
-              Nuestra masa tradicional de roscón, fermentación lenta y suave aroma a azahar. Perfecto para acompañar con chocolate caliente.
-            </p>
-            <div class="menu-precios">
-              <span>Mini 150 g · 7 €</span>
-              <span>250 g · 13 €</span>
-              <span>500 g · 25 €</span>
-              <span>1 kg · 35 €</span>
+            <div class="menu-card-imagen">
+              <img src="https://images.unsplash.com/photo-1555507036-ab1f4038808a?w=400&h=300&fit=crop" alt="Roscón original">
+            </div>
+            <div class="menu-card-contenido">
+              <div class="menu-titulo">Roscón original</div>
+              <div class="menu-etiqueta">Clásico, esponjoso y aromático.</div>
+              <p class="menu-detalle">
+                Nuestra masa tradicional de roscón, fermentación lenta y suave aroma a azahar. Perfecto para acompañar con chocolate caliente.
+              </p>
+              <div class="menu-precios">
+                <span>Mini 150 g · 7 €</span>
+                <span>250 g · 13 €</span>
+                <span>500 g · 25 €</span>
+                <span>1 kg · 35 €</span>
+              </div>
             </div>
           </article>
 
           <article class="menu-card">
-            <div class="menu-titulo">Roscón de nata / trufa / crema</div>
-            <div class="menu-etiqueta">Rellenos cremosos, listos para celebrar.</div>
-            <p class="menu-detalle">
-              Elige entre nata montada, trufa o crema pastelera casera. Ideal para compartir en familia o en la oficina.
-            </p>
-            <div class="menu-precios">
-              <span>Mini 150 g · 8 €</span>
-              <span>250 g · 15 €</span>
-              <span>500 g · 28 €</span>
-              <span>1 kg · 40 €</span>
+            <div class="menu-card-imagen">
+              <img src="https://images.unsplash.com/photo-1578985545062-69928b1d9587?w=400&h=300&fit=crop" alt="Roscón de nata">
+            </div>
+            <div class="menu-card-contenido">
+              <div class="menu-titulo">Roscón de nata / trufa / crema</div>
+              <div class="menu-etiqueta">Rellenos cremosos, listos para celebrar.</div>
+              <p class="menu-detalle">
+                Elige entre nata montada, trufa o crema pastelera casera. Ideal para compartir en familia o en la oficina.
+              </p>
+              <div class="menu-precios">
+                <span>Mini 150 g · 8 €</span>
+                <span>250 g · 15 €</span>
+                <span>500 g · 28 €</span>
+                <span>1 kg · 40 €</span>
+              </div>
             </div>
           </article>
 
           <article class="menu-card">
-            <div class="menu-titulo">Roscón Kinder Bueno</div>
-            <div class="menu-etiqueta">Para amantes del chocolate.</div>
-            <p class="menu-detalle">
-              Masa tierna rellena con crema inspirada en Kinder Bueno y cobertura de chocolate suave.
-            </p>
-            <div class="menu-precios">
-              <span>Mini 150 g · 9 €</span>
-              <span>250 g · 17 €</span>
-              <span>500 g · 30 €</span>
-              <span>1 kg · 45 €</span>
+            <div class="menu-card-imagen">
+              <img src="https://images.unsplash.com/photo-1578985545062-69928b1d9587?w=400&h=300&fit=crop" alt="Roscón Kinder Bueno">
+            </div>
+            <div class="menu-card-contenido">
+              <div class="menu-titulo">Roscón Kinder Bueno</div>
+              <div class="menu-etiqueta">Para amantes del chocolate.</div>
+              <p class="menu-detalle">
+                Masa tierna rellena con crema inspirada en Kinder Bueno y cobertura de chocolate suave.
+              </p>
+              <div class="menu-precios">
+                <span>Mini 150 g · 9 €</span>
+                <span>250 g · 17 €</span>
+                <span>500 g · 30 €</span>
+                <span>1 kg · 45 €</span>
+              </div>
             </div>
           </article>
 
           <article class="menu-card">
-            <div class="menu-titulo">Roscón Lotus</div>
-            <div class="menu-etiqueta">Toque especiado y caramelizado.</div>
-            <p class="menu-detalle">
-              Relleno de crema Lotus con topping crujiente de galleta. Un equilibrio perfecto entre dulce y especias suaves.
-            </p>
-            <div class="menu-precios">
-              <span>Mini 150 g · 9 €</span>
-              <span>250 g · 17 €</span>
-              <span>500 g · 30 €</span>
-              <span>1 kg · 45 €</span>
+            <div class="menu-card-imagen">
+              <img src="https://images.unsplash.com/photo-1578985545062-69928b1d9587?w=400&h=300&fit=crop" alt="Roscón Lotus">
+            </div>
+            <div class="menu-card-contenido">
+              <div class="menu-titulo">Roscón Lotus</div>
+              <div class="menu-etiqueta">Toque especiado y caramelizado.</div>
+              <p class="menu-detalle">
+                Relleno de crema Lotus con topping crujiente de galleta. Un equilibrio perfecto entre dulce y especias suaves.
+              </p>
+              <div class="menu-precios">
+                <span>Mini 150 g · 9 €</span>
+                <span>250 g · 17 €</span>
+                <span>500 g · 30 €</span>
+                <span>1 kg · 45 €</span>
+              </div>
             </div>
           </article>
 
           <article class="menu-card">
-            <div class="menu-titulo">Roscón Red Velvet</div>
-            <div class="menu-etiqueta">Color intenso, corazón de cacao.</div>
-            <p class="menu-detalle">
-              Masa tipo Red Velvet con suave crema de queso, perfecto para ocasiones especiales.
-            </p>
-            <div class="menu-precios">
-              <span>Mini 150 g · 9 €</span>
-              <span>250 g · 17 €</span>
-              <span>500 g · 30 €</span>
-              <span>1 kg · 45 €</span>
+            <div class="menu-card-imagen">
+              <img src="" alt="Roscón Red Velvet">
+            </div>
+            <div class="menu-card-contenido">
+              <div class="menu-titulo">Roscón Red Velvet</div>
+              <div class="menu-etiqueta">Color intenso, corazón de cacao.</div>
+              <p class="menu-detalle">
+                Masa tipo Red Velvet con suave crema de queso, perfecto para ocasiones especiales.
+              </p>
+              <div class="menu-precios">
+                <span>Mini 150 g · 9 €</span>
+                <span>250 g · 17 €</span>
+                <span>500 g · 30 €</span>
+                <span>1 kg · 45 €</span>
+              </div>
             </div>
           </article>
 
           <article class="menu-card">
-            <div class="menu-titulo">Roscón Oreo</div>
-            <div class="menu-etiqueta">Galleta y crema en cada bocado.</div>
-            <p class="menu-detalle">
-              Relleno de crema de Oreo y trocitos de galleta, ideal para los más pequeños (y no tan pequeños).
-            </p>
-            <div class="menu-precios">
-              <span>Mini 150 g · 9 €</span>
-              <span>250 g · 17 €</span>
-              <span>500 g · 30 €</span>
-              <span>1 kg · 45 €</span>
+            <div class="menu-card-imagen">
+              <img src="https://images.unsplash.com/photo-1578985545062-69928b1d9587?w=400&h=300&fit=crop" alt="Roscón Oreo">
+            </div>
+            <div class="menu-card-contenido">
+              <div class="menu-titulo">Roscón Oreo</div>
+              <div class="menu-etiqueta">Galleta y crema en cada bocado.</div>
+              <p class="menu-detalle">
+                Relleno de crema de Oreo y trocitos de galleta, ideal para los más pequeños (y no tan pequeños).
+              </p>
+              <div class="menu-precios">
+                <span>Mini 150 g · 9 €</span>
+                <span>250 g · 17 €</span>
+                <span>500 g · 30 €</span>
+                <span>1 kg · 45 €</span>
+              </div>
             </div>
           </article>
 
           <article class="menu-card">
-            <div class="menu-titulo">Roscón Pink Panther</div>
-            <div class="menu-etiqueta">Rosa, divertido y muy suave.</div>
-            <p class="menu-detalle">
-              Masa esponjosa con crema rosa de sabor delicado, un clásico de nuestra vitrina.
-            </p>
-            <div class="menu-precios">
-              <span>Mini 150 g · 9 €</span>
-              <span>250 g · 17 €</span>
-              <span>500 g · 30 €</span>
-              <span>1 kg · 45 €</span>
+            <div class="menu-card-imagen">
+              <img src="https://images.unsplash.com/photo-1578985545062-69928b1d9587?w=400&h=300&fit=crop" alt="Roscón Pink Panther">
+            </div>
+            <div class="menu-card-contenido">
+              <div class="menu-titulo">Roscón Pink Panther</div>
+              <div class="menu-etiqueta">Rosa, divertido y muy suave.</div>
+              <p class="menu-detalle">
+                Masa esponjosa con crema rosa de sabor delicado, un clásico de nuestra vitrina.
+              </p>
+              <div class="menu-precios">
+                <span>Mini 150 g · 9 €</span>
+                <span>250 g · 17 €</span>
+                <span>500 g · 30 €</span>
+                <span>1 kg · 45 €</span>
+              </div>
             </div>
           </article>
 
           <article class="menu-card">
-            <div class="menu-titulo">Roscón Ferrero</div>
-            <div class="menu-etiqueta">Avellana y chocolate premium.</div>
-            <p class="menu-detalle">
-              Inspirado en el clásico bombón, con crema de avellanas y cobertura crujiente.
-            </p>
-            <div class="menu-precios">
-              <span>Mini 150 g · 9 €</span>
-              <span>250 g · 17 €</span>
-              <span>500 g · 30 €</span>
-              <span>1 kg · 45 €</span>
+            <div class="menu-card-imagen">
+              <img src="C:\Users\marko\Desktop\$$$$\automatizacion de procesos\Rincon_de_mama_ines\img\rosconFerrero.jpeg" alt="Roscón Ferrero">
+            </div>
+            <div class="menu-card-contenido">
+              <div class="menu-titulo">Roscón Ferrero</div>
+              <div class="menu-etiqueta">Avellana y chocolate premium.</div>
+              <p class="menu-detalle">
+                Inspirado en el clásico bombón, con crema de avellanas y cobertura crujiente.
+              </p>
+              <div class="menu-precios">
+                <span>Mini 150 g · 9 €</span>
+                <span>250 g · 17 €</span>
+                <span>500 g · 30 €</span>
+                <span>1 kg · 45 €</span>
+              </div>
             </div>
           </article>
 
           <article class="menu-card destacado">
-            <div class="menu-titulo">Roscón especial del mes</div>
-            <div class="menu-etiqueta">Sabor limitado, según temporada.</div>
-            <p class="menu-detalle">
-              Cada mes creamos un roscón diferente inspirado en frutas de temporada o combinaciones sorprendentes. Pregunta por el sabor disponible.
-            </p>
-            <div class="menu-precios">
-              <span>Mini 150 g · 10 €</span>
-              <span>250 g · 18 €</span>
-              <span>500 g · 32 €</span>
-              <span>1 kg · 47 €</span>
+            <div class="menu-card-imagen">
+              <img src="" alt="Roscón especial del mes">
             </div>
-            <div class="etiqueta-mes">🌸 Edición limitada del mes</div>
+            <div class="menu-card-contenido">
+              <div class="menu-titulo">Roscón especial del mes</div>
+              <div class="menu-etiqueta">Sabor limitado, según temporada.</div>
+              <p class="menu-detalle">
+                Cada mes creamos un roscón diferente inspirado en frutas de temporada o combinaciones sorprendentes. Pregunta por el sabor disponible.
+              </p>
+              <div class="menu-precios">
+                <span>Mini 150 g · 10 €</span>
+                <span>250 g · 18 €</span>
+                <span>500 g · 32 €</span>
+                <span>1 kg · 47 €</span>
+              </div>
+              <div class="etiqueta-mes">🌸 Edición limitada del mes</div>
+            </div>
           </article>
         </div>
       </div>
@@ -883,140 +296,180 @@
       <div class="menu-tab" id="tab-tartas" style="display:none;">
         <div class="menu-grid">
           <article class="menu-card destacado">
-            <div class="menu-titulo">Tarta de chocolate</div>
-            <div class="menu-etiqueta">Esponjosa, intensa y muy casera.</div>
-            <p class="menu-detalle">
-              Bizcocho de cacao con relleno cremoso y cobertura brillante de chocolate. Disponible en varios tamaños para adaptarse a tu celebración.
-            </p>
-            <div class="menu-precios">
-              <span>Porción · 7 €</span>
-              <span>2‑3 raciones · 18 €</span>
-              <span>5‑6 raciones · 26 €</span>
-              <span>7‑8 raciones · 34 €</span>
-              <span>8‑10 raciones · 39 €</span>
-              <span>10‑12 raciones · 46 €</span>
-              <span>12‑18 raciones · 52 €</span>
+            <div class="menu-card-imagen">
+              <img src="C:\Users\marko\Desktop\$$$$\automatizacion de procesos\Rincon_de_mama_ines\img\tartaChoco.jpeg" alt="Tarta de chocolate">
+            </div>
+            <div class="menu-card-contenido">
+              <div class="menu-titulo">Tarta de chocolate</div>
+              <div class="menu-etiqueta">Esponjosa, intensa y muy casera.</div>
+              <p class="menu-detalle">
+                Bizcocho de cacao con relleno cremoso y cobertura brillante de chocolate. Disponible en varios tamaños para adaptarse a tu celebración.
+              </p>
+              <div class="menu-precios">
+                <span>Porción · 7 €</span>
+                <span>2†3 raciones · 18 €</span>
+                <span>5†6 raciones · 26 €</span>
+                <span>7†8 raciones · 34 €</span>
+                <span>8‐10 raciones · 39 €</span>
+                <span>10‐12 raciones · 46 €</span>
+                <span>12‐18 raciones · 52 €</span>
+              </div>
             </div>
           </article>
 
           <article class="menu-card">
-            <div class="menu-titulo">Tarta de queso</div>
-            <div class="menu-etiqueta">Cremosa, al horno.</div>
-            <p class="menu-detalle">
-              Tarta de queso estilo casero, ligeramente tostada, con base crujiente de galleta. Puedes añadir coulis de frutos rojos.
-            </p>
-            <div class="menu-precios">
-              <span>Porción · 7 €</span>
-              <span>2‑3 raciones · 18 €</span>
-              <span>5‑6 raciones · 26 €</span>
-              <span>7‑8 raciones · 34 €</span>
-              <span>8‑10 raciones · 39 €</span>
-              <span>10‑12 raciones · 46 €</span>
-              <span>12‑18 raciones · 52 €</span>
+            <div class="menu-card-imagen">
+              <img src="C:\Users\marko\Desktop\$$$$\automatizacion de procesos\Rincon_de_mama_ines\img\tartaQueso.jpeg" alt="Tarta de queso">
+            </div>
+            <div class="menu-card-contenido">
+              <div class="menu-titulo">Tarta de queso</div>
+              <div class="menu-etiqueta">Cremosa, al horno.</div>
+              <p class="menu-detalle">
+                Tarta de queso estilo casero, ligeramente tostada, con base crujiente de galleta. Puedes añadir coulis de frutos rojos.
+              </p>
+              <div class="menu-precios">
+                <span>Porción · 7 €</span>
+                <span>2†3 raciones · 18 €</span>
+                <span>5†6 raciones · 26 €</span>
+                <span>7†8 raciones · 34 €</span>
+                <span>8‐10 raciones · 39 €</span>
+                <span>10‐12 raciones · 46 €</span>
+                <span>12‐18 raciones · 52 €</span>
+              </div>
             </div>
           </article>
 
           <article class="menu-card">
-            <div class="menu-titulo">Tarta de zanahoria</div>
-            <div class="menu-etiqueta">Con nueces y crema suave.</div>
-            <p class="menu-detalle">
-              Bizcocho húmedo de zanahoria con especias suaves y frosting de queso crema. Una opción equilibrada y muy aromática.
-            </p>
-            <div class="menu-precios">
-              <span>Porción · 6 €</span>
-              <span>2‑3 raciones · 17 €</span>
-              <span>5‑6 raciones · 25 €</span>
-              <span>7‑8 raciones · 33 €</span>
-              <span>8‑10 raciones · 38 €</span>
-              <span>10‑12 raciones · 45 €</span>
-              <span>12‑18 raciones · 50 €</span>
+            <div class="menu-card-imagen">
+              <img src="C:\Users\marko\Desktop\$$$$\automatizacion de procesos\Rincon_de_mama_ines\img\tartaZanah.jpeg" alt="Tarta de zanahoria">
+            </div>
+            <div class="menu-card-contenido">
+              <div class="menu-titulo">Tarta de zanahoria</div>
+              <div class="menu-etiqueta">Con nueces y crema suave.</div>
+              <p class="menu-detalle">
+                Bizcocho húmedo de zanahoria con especias suaves y frosting de queso crema. Una opción equilibrada y muy aromática.
+              </p>
+              <div class="menu-precios">
+                <span>Porción · 6 €</span>
+                <span>2†3 raciones · 17 €</span>
+                <span>5†6 raciones · 25 €</span>
+                <span>7†8 raciones · 33 €</span>
+                <span>8‐10 raciones · 38 €</span>
+                <span>10‐12 raciones · 45 €</span>
+                <span>12‐18 raciones · 50 €</span>
+              </div>
             </div>
           </article>
 
           <article class="menu-card">
-            <div class="menu-titulo">Tarta Kinder Bueno</div>
-            <div class="menu-etiqueta">Rellena de crema Kinder.</div>
-            <p class="menu-detalle">
-              Para fans de este clásico chocolate: bizcocho suave con capas de crema inspirada en Kinder y decoración temática.
-            </p>
-            <div class="menu-precios">
-              <span>Porción · 6 €</span>
-              <span>2‑3 raciones · 17 €</span>
-              <span>5‑6 raciones · 25 €</span>
-              <span>7‑8 raciones · 33 €</span>
-              <span>8‑10 raciones · 38 €</span>
-              <span>10‑12 raciones · 45 €</span>
-              <span>12‑18 raciones · 50 €</span>
+            <div class="menu-card-imagen">
+              <img src="C:\Users\marko\Desktop\$$$$\automatizacion de procesos\Rincon_de_mama_ines\img\tartaKinder.jpeg" alt="Tarta Kinder Bueno">
+            </div>
+            <div class="menu-card-contenido">
+              <div class="menu-titulo">Tarta Kinder Bueno</div>
+              <div class="menu-etiqueta">Rellena de crema Kinder.</div>
+              <p class="menu-detalle">
+                Para fans de este clásico chocolate: bizcocho suave con capas de crema inspirada en Kinder y decoración temática.
+              </p>
+              <div class="menu-precios">
+                <span>Porción · 6 €</span>
+                <span>2†3 raciones · 17 €</span>
+                <span>5†6 raciones · 25 €</span>
+                <span>7†8 raciones · 33 €</span>
+                <span>8‐10 raciones · 38 €</span>
+                <span>10‐12 raciones · 45 €</span>
+                <span>12‐18 raciones · 50 €</span>
+              </div>
             </div>
           </article>
 
           <article class="menu-card">
-            <div class="menu-titulo">Tarta Bailys</div>
-            <div class="menu-etiqueta">Suave toque licoroso.</div>
-            <p class="menu-detalle">
-              Tarta cremosa con ligero toque de licor Bailys, perfecta para sobremesas de adultos.
-            </p>
-            <div class="menu-precios">
-              <span>Porción · 6 €</span>
-              <span>2‑3 raciones · 17 €</span>
-              <span>5‑6 raciones · 25 €</span>
-              <span>7‑8 raciones · 33 €</span>
-              <span>8‑10 raciones · 38 €</span>
-              <span>10‑12 raciones · 45 €</span>
-              <span>12‑18 raciones · 50 €</span>
+            <div class="menu-card-imagen">
+              <img src="https://images.unsplash.com/photo-1578985545062-69928b1d9587?w=400&h=300&fit=crop" alt="Tarta Bailys">
+            </div>
+            <div class="menu-card-contenido">
+              <div class="menu-titulo">Tarta Bailys</div>
+              <div class="menu-etiqueta">Suave toque licoroso.</div>
+              <p class="menu-detalle">
+                Tarta cremosa con ligero toque de licor Bailys, perfecta para sobremesas de adultos.
+              </p>
+              <div class="menu-precios">
+                <span>Porción · 6 €</span>
+                <span>2†3 raciones · 17 €</span>
+                <span>5†6 raciones · 25 €</span>
+                <span>7†8 raciones · 33 €</span>
+                <span>8‐10 raciones · 38 €</span>
+                <span>10‐12 raciones · 45 €</span>
+                <span>12‐18 raciones · 50 €</span>
+              </div>
             </div>
           </article>
 
           <article class="menu-card">
-            <div class="menu-titulo">Tarta dulce de leche</div>
-            <div class="menu-etiqueta">Caramelo cremoso en cada capa.</div>
-            <p class="menu-detalle">
-              Capas de bizcocho vainilla con relleno abundante de dulce de leche y cobertura suave.
-            </p>
-            <div class="menu-precios">
-              <span>Porción · 6 €</span>
-              <span>2‑3 raciones · 17 €</span>
-              <span>5‑6 raciones · 25 €</span>
-              <span>7‑8 raciones · 33 €</span>
-              <span>8‑10 raciones · 38 €</span>
-              <span>10‑12 raciones · 45 €</span>
-              <span>12‑18 raciones · 50 €</span>
+            <div class="menu-card-imagen">
+              <img src="C:\Users\marko\Desktop\$$$$\automatizacion de procesos\Rincon_de_mama_ines\img\tartaDulce.jpeg" alt="Tarta dulce de leche">
+            </div>
+            <div class="menu-card-contenido">
+              <div class="menu-titulo">Tarta dulce de leche</div>
+              <div class="menu-etiqueta">Caramelo cremoso en cada capa.</div>
+              <p class="menu-detalle">
+                Capas de bizcocho vainilla con relleno abundante de dulce de leche y cobertura suave.
+              </p>
+              <div class="menu-precios">
+                <span>Porción · 6 €</span>
+                <span>2†3 raciones · 17 €</span>
+                <span>5†6 raciones · 25 €</span>
+                <span>7†8 raciones · 33 €</span>
+                <span>8‐10 raciones · 38 €</span>
+                <span>10‐12 raciones · 45 €</span>
+                <span>12‐18 raciones · 50 €</span>
+              </div>
             </div>
           </article>
 
           <article class="menu-card">
-            <div class="menu-titulo">Tarta café / moca</div>
-            <div class="menu-etiqueta">Equilibrio perfecto entre café y cacao.</div>
-            <p class="menu-detalle">
-              Para amantes del café, con notas suaves de espresso y cacao en una tarta cremosa.
-            </p>
-            <div class="menu-precios">
-              <span>Porción · 6 €</span>
-              <span>2‑3 raciones · 17 €</span>
-              <span>5‑6 raciones · 25 €</span>
-              <span>7‑8 raciones · 33 €</span>
-              <span>8‑10 raciones · 38 €</span>
-              <span>10‑12 raciones · 45 €</span>
-              <span>12‑18 raciones · 50 €</span>
+            <div class="menu-card-imagen">
+              <img src="https://images.unsplash.com/photo-1578985545062-69928b1d9587?w=400&h=300&fit=crop" alt="Tarta café moca">
+            </div>
+            <div class="menu-card-contenido">
+              <div class="menu-titulo">Tarta café / moca</div>
+              <div class="menu-etiqueta">Equilibrio perfecto entre café y cacao.</div>
+              <p class="menu-detalle">
+                Para amantes del café, con notas suaves de espresso y cacao en una tarta cremosa.
+              </p>
+              <div class="menu-precios">
+                <span>Porción · 6 €</span>
+                <span>2†3 raciones · 17 €</span>
+                <span>5†6 raciones · 25 €</span>
+                <span>7†8 raciones · 33 €</span>
+                <span>8‐10 raciones · 38 €</span>
+                <span>10‐12 raciones · 45 €</span>
+                <span>12‐18 raciones · 50 €</span>
+              </div>
             </div>
           </article>
 
           <article class="menu-card destacado">
-            <div class="menu-titulo">La tarta del mes</div>
-            <div class="menu-etiqueta">Creación única, según temporada.</div>
-            <p class="menu-detalle">
-              Cada mes diseñamos una tarta especial: puede ser frutal, chocolatosa o con sabores más atrevidos. Pregunta por la propuesta actual.
-            </p>
-            <div class="menu-precios">
-              <span>Porción · 7 €</span>
-              <span>2‑3 raciones · 18 €</span>
-              <span>5‑6 raciones · 26 €</span>
-              <span>7‑8 raciones · 33 €</span>
-              <span>8‑10 raciones · 38 €</span>
-              <span>10‑12 raciones · 45 €</span>
-              <span>12‑18 raciones · 50 €</span>
+            <div class="menu-card-imagen">
+              <img src="C:\Users\marko\Desktop\$$$$\automatizacion de procesos\Rincon_de_mama_ines\img\tartaRedVelvet.jpeg" alt="Tarta Red Velvet">
             </div>
-            <div class="etiqueta-mes">🎂 Consulta sabores disponibles</div>
+            <div class="menu-card-contenido">
+              <div class="menu-titulo">Tarta Red Velvet</div>
+              <div class="menu-etiqueta">Color intenso, corazón de cacao.</div>
+              <p class="menu-detalle">
+               Masa tipo Red Velvet con suave crema de queso, perfecto para ocasiones especiales.
+              </p>
+              <div class="menu-precios">
+                <span>Porción · 7 €</span>
+                <span>2†3 raciones · 18 €</span>
+                <span>5†6 raciones · 26 €</span>
+                <span>7†8 raciones · 33 €</span>
+                <span>8‐10 raciones · 38 €</span>
+                <span>10‐12 raciones · 45 €</span>
+                <span>12‐18 raciones · 50 €</span>
+              </div>
+              <div class="etiqueta-mes">🍰 Consulta sabores disponibles</div>
+            </div>
           </article>
         </div>
       </div>
@@ -1025,21 +478,31 @@
       <div class="menu-tab" id="tab-temporada" style="display:none;">
         <div class="menu-grid">
           <article class="menu-card destacado">
-            <div class="menu-titulo">Ediciones de temporada</div>
-            <div class="menu-etiqueta">Navidad, San Valentín, comuniones y más.</div>
-            <p class="menu-detalle">
-              Diseñamos colecciones especiales de tartas, roscones y dulces decorados para las fechas señaladas.
-              Consulta en tienda o por WhatsApp las propuestas actuales y packs para eventos.
-            </p>
+            <div class="menu-card-imagen">
+              <img src="https://images.unsplash.com/photo-1578985545062-69928b1d9587?w=400&h=300&fit=crop" alt="Ediciones de temporada">
+            </div>
+            <div class="menu-card-contenido">
+              <div class="menu-titulo">Ediciones de temporada</div>
+              <div class="menu-etiqueta">Navidad, San Valentín, comuniones y más.</div>
+              <p class="menu-detalle">
+                Diseñamos colecciones especiales de tartas, roscones y dulces decorados para las fechas señaladas.
+                Consulta en tienda o por WhatsApp las propuestas actuales y packs para eventos.
+              </p>
+            </div>
           </article>
 
           <article class="menu-card">
-            <div class="menu-titulo">Detalles dulces para eventos</div>
-            <div class="menu-etiqueta">Mesas dulces, cupcakes, mini tartaletas, galletas decoradas.</div>
-            <p class="menu-detalle">
-              Prepararemos un surtido a tu medida para cumpleaños, bautizos, comuniones o eventos de empresa.
-              Coméntanos el número de invitados y estilo que buscas.
-            </p>
+            <div class="menu-card-imagen">
+              <img src="https://images.unsplash.com/photo-1578985545062-69928b1d9587?w=400&h=300&fit=crop" alt="Detalles dulces para eventos">
+            </div>
+            <div class="menu-card-contenido">
+              <div class="menu-titulo">Detalles dulces para eventos</div>
+              <div class="menu-etiqueta">Mesas dulces, cupcakes, mini tartaletas, galletas decoradas.</div>
+              <p class="menu-detalle">
+                Prepararemos un surtido a tu medida para cumpleaños, bautizos, comuniones o eventos de empresa.
+                Coméntanos el número de invitados y estilo que buscas.
+              </p>
+            </div>
           </article>
         </div>
       </div>
