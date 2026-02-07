@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pago Cancelado - El Rincón De Mamá Inés</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+        
+        .container {
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            text-align: center;
+            padding: 60px 40px;
+            max-width: 500px;
+        }
+        
+        .cancel-icon {
+            font-size: 80px;
+            margin-bottom: 20px;
+        }
+        
+        h1 {
+            font-size: 28px;
+            color: #333;
+            margin-bottom: 10px;
+        }
+        
+        p {
+            color: #666;
+            font-size: 16px;
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+        
+        .details {
+            background: #fff5f5;
+            border-left: 4px solid #f5576c;
+            padding: 20px;
+            margin: 30px 0;
+            text-align: left;
+            border-radius: 8px;
+        }
+        
+        .details p {
+            margin: 8px 0;
+            font-size: 14px;
+            color: #666;
+        }
+        
+        .button {
+            display: inline-block;
+            padding: 12px 32px;
+            background: #4299e1;
+            color: white;
+            text-decoration: none;
+            border-radius: 6px;
+            font-weight: 600;
+            transition: background 0.3s;
+            border: none;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        
+        .button:hover {
+            background: #3182ce;
+        }
+        
+        .button-secondary {
+            background: #f5576c;
+            margin-top: 10px;
+            display: block;
+        }
+        
+        .button-secondary:hover {
+            background: #e8476a;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="cancel-icon">✕</div>
+        <h1>Pago Cancelado</h1>
+        <p>No se realizó el pago. Tu carrito sigue guardado.</p>
+        
+        <div class="details">
+            <p><strong>¿Qué pasó?</strong></p>
+            <p>Cancelaste el proceso de pago o ocurrió un error. Tu carrito se mantiene intacto.</p>
+            <p style="margin-top: 15px;"><strong>Opciones:</strong></p>
+            <p>• Intenta pagar de nuevo</p>
+            <p>• Contáctanos para otro método de pago</p>
+        </div>
+        
+        <button class="button" onclick="window.location.href='/'">Volver a la tienda</button>
+        <button class="button button-secondary" onclick="window.location.href='/#contacto'">Contactarnos</button>
+    </div>
+</body>
+</html>
