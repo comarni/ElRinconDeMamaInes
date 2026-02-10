@@ -7,9 +7,9 @@
   <!-- Meta SEO -->
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="description"
-        content="Pastelería artesanal en [Ciudad o barrio]. Tartas, roscones y dulces caseros elaborados a diario con ingredientes naturales." />
+        content="Pastelería artesanal en Alcobendas, San Sebastián de los Reyes, madrid norte. Tartas, roscones y dulces caseros elaborados a diario con ingredientes naturales." />
   <meta name="keywords"
-        content="pastelería artesanal, repostería, dulces caseros, tartas, roscones, [Ciudad o barrio]" />
+        content="pastelería artesanal, repostería, dulces caseros, tartas, roscones, Alcobendas, San Sebastián de los Reyes, madrid norte." />
 
   <!-- Tipografías Google (estilo artesanal y elegante) -->
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&family=Nunito:wght@300;400;600&display=swap" rel="stylesheet">
@@ -37,6 +37,21 @@
         <a href="#eventos">Eventos</a>
         <a href="#sobre">Sobre nosotros</a>
         <a href="#contacto">Pedidos</a>
+        <div class="nav-carrito-wrapper">
+          <button class="nav-carrito" id="btnCarrito" title="Ver cesta">
+            🛒 <span id="contadorCarrito">0</span>
+          </button>
+          <div class="carrito-modal" id="carritoModal">
+            <div class="carrito-contenido">
+              <h3>Tu cesta</h3>
+              <div id="itemsCarrito" class="carrito-items"></div>
+              <div class="carrito-total">
+                <strong>Total: <span id="totalCarrito">0.00</span> €</strong>
+              </div>
+              <button class="btn" id="btnPedido" style="width: 100%; margin-top: 1rem;">Hacer pedido</button>
+            </div>
+          </div>
+        </div>
       </nav>
     </div>
   </header>
@@ -75,19 +90,37 @@
 
           <div class="hero-productos">
             <div class="mini-card">
-              <strong>Roscones</strong>
-              <span>Todo el año</span><br>
-              <span>Desde 7 €</span>
+              <div class="mini-card-img">
+                <img src="https://github.com/comarni/ElRinconDeMamaInes/blob/main/img/rosconOriginal.jpeg?raw=true" alt="Roscones">
+                <div class="mini-badge">🌟</div>
+              </div>
+              <div class="mini-card-content">
+                <strong>Roscones</strong>
+                <span class="mini-tag">Todo el año</span>
+                <span class="mini-price">Desde 7 €</span>
+              </div>
             </div>
             <div class="mini-card">
-              <strong>Tartas</strong>
-              <span>Cumpleaños</span><br>
-              <span>Desde 6 €</span>
+              <div class="mini-card-img">
+                <img src="https://github.com/comarni/ElRinconDeMamaInes/blob/main/img/tartaChoco.jpeg?raw=true" alt="Tartas">
+                <div class="mini-badge">🎂</div>
+              </div>
+              <div class="mini-card-content">
+                <strong>Tartas</strong>
+                <span class="mini-tag">Cumpleaños</span>
+                <span class="mini-price">Desde 6 €</span>
+              </div>
             </div>
             <div class="mini-card">
-              <strong>Especial del mes</strong>
-              <span>Sabor sorpresa</span><br>
-              <span>*Edición limitada*</span>
+              <div class="mini-card-img">
+                <img src="https://github.com/comarni/ElRinconDeMamaInes/blob/main/img/rosconKinder.jpeg?raw=true" alt="Especial">
+                <div class="mini-badge">✨</div>
+              </div>
+              <div class="mini-card-content">
+                <strong>Especial mes</strong>
+                <span class="mini-tag">Sabor sorpresa</span>
+                <span class="mini-price-special">Edición limitada</span>
+              </div>
             </div>
           </div>
 
@@ -600,12 +633,25 @@
               </p>
               <div class="menu-precios">
                 <span>Porción · 6 €</span>
-                <span>2†3 raciones · 17 €</span>
-                <span>5†6 raciones · 25 €</span>
-                <span>7†8 raciones · 33 €</span>
+                <span>2‑3 raciones · 17 €</span>
+                <span>5‑6 raciones · 25 €</span>
+                <span>7‑8 raciones · 33 €</span>
                 <span>8‐10 raciones · 38 €</span>
                 <span>10‐12 raciones · 45 €</span>
                 <span>12‐18 raciones · 50 €</span>
+              </div>
+              <div class="producto-selectors">
+                <select class="selector-tamaño" data-producto="Tarta dulce de leche" data-precios="6|17|25|33|38|45|50">
+                  <option value="0">Porción - 6€</option>
+                  <option value="1">2-3 raciones - 17€</option>
+                  <option value="2">5-6 raciones - 25€</option>
+                  <option value="3">7-8 raciones - 33€</option>
+                  <option value="4">8-10 raciones - 38€</option>
+                  <option value="5">10-12 raciones - 45€</option>
+                  <option value="6">12-18 raciones - 50€</option>
+                </select>
+                <input type="number" class="cantidad-input" min="1" max="99" value="1" placeholder="Cantidad">
+                <button class="btn-agregar" data-producto="Tarta dulce de leche">Agregar</button>
               </div>
             </div>
           </article>
@@ -622,12 +668,25 @@
               </p>
               <div class="menu-precios">
                 <span>Porción · 6 €</span>
-                <span>2†3 raciones · 17 €</span>
-                <span>5†6 raciones · 25 €</span>
-                <span>7†8 raciones · 33 €</span>
+                <span>2‑3 raciones · 17 €</span>
+                <span>5‑6 raciones · 25 €</span>
+                <span>7‑8 raciones · 33 €</span>
                 <span>8‐10 raciones · 38 €</span>
                 <span>10‐12 raciones · 45 €</span>
                 <span>12‐18 raciones · 50 €</span>
+              </div>
+              <div class="producto-selectors">
+                <select class="selector-tamaño" data-producto="Tarta café / moca" data-precios="6|17|25|33|38|45|50">
+                  <option value="0">Porción - 6€</option>
+                  <option value="1">2-3 raciones - 17€</option>
+                  <option value="2">5-6 raciones - 25€</option>
+                  <option value="3">7-8 raciones - 33€</option>
+                  <option value="4">8-10 raciones - 38€</option>
+                  <option value="5">10-12 raciones - 45€</option>
+                  <option value="6">12-18 raciones - 50€</option>
+                </select>
+                <input type="number" class="cantidad-input" min="1" max="99" value="1" placeholder="Cantidad">
+                <button class="btn-agregar" data-producto="Tarta café / moca">Agregar</button>
               </div>
             </div>
           </article>
@@ -1045,8 +1104,8 @@
         <div class="info-bloque">
           <h3>Contacto directo</h3>
           <p>
-            Teléfono / WhatsApp: <strong>[tu teléfono]</strong><br>
-            Email: <strong>[tu email]</strong>
+            Teléfono / WhatsApp: <strong><a href="https://wa.me/34661099782" target="_blank" rel="noopener noreferrer">34 661 09 97 82</a></strong><br>
+            Email: <strong><a href="mailto:01elrincondemamaines@gmail.com">01elrincondemamaines@gmail.com</a></strong>
           </p>
         </div>
 
@@ -1072,7 +1131,7 @@
               </svg>
             </a>
 
-            <a href="https://wa.me/34661099782" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp" title="WhatsApp">
+            <a href="https://wa.me/34661099782" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp" title="WhatsApp - 34 661 09 97 82">
               <!-- WhatsApp SVG -->
               <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
                 <path d="M20.52 3.48A11.94 11.94 0 0 0 12 0C5.373 0 .02 5.353.02 12.0c0 2.116.55 4.17 1.6 5.98L0 24l6.3-1.66A11.94 11.94 0 0 0 12 24c6.627 0 12-5.373 12-12 0-1.94-.44-3.78-1.48-5.52z" fill="#25D366"/>
@@ -1085,22 +1144,7 @@
     </div>
   </section>
 
-  <!-- CARRITO FLOTANTE -->
-  <div class="carrito-flotante">
-    <button class="btn-carrito" id="btnCarrito">
-      🛒 <span id="contadorCarrito">0</span>
-    </button>
-    <div class="carrito-modal" id="carritoModal">
-      <div class="carrito-contenido">
-        <h3>Tu cesta</h3>
-        <div id="itemsCarrito" class="carrito-items"></div>
-        <div class="carrito-total">
-          <strong>Total: <span id="totalCarrito">0.00</span> €</strong>
-        </div>
-        <button class="btn" id="btnPedido" style="width: 100%; margin-top: 1rem;">Hacer pedido</button>
-      </div>
-    </div>
-  </div>
+
 
   <footer>
     © <span id="year"></span> El  Rincón De Mamá Inés. Todos los derechos reservados.
@@ -1211,16 +1255,18 @@
     });
 
     // Toggle carrito modal
-    document.getElementById('btnCarrito').addEventListener('click', () => {
+    document.getElementById('btnCarrito').addEventListener('click', (e) => {
+      e.stopPropagation();
       const carritoModal = document.getElementById('carritoModal');
       carritoModal.classList.toggle('activo');
     });
 
     // Cerrar carrito al hacer clic fuera
     document.addEventListener('click', (e) => {
-      const carritoFloante = document.querySelector('.carrito-flotante');
-      if (!carritoFloante.contains(e.target)) {
-        document.getElementById('carritoModal').classList.remove('activo');
+      const carritoModal = document.getElementById('carritoModal');
+      const btnCarrito = document.getElementById('btnCarrito');
+      if (!carritoModal.contains(e.target) && !btnCarrito.contains(e.target)) {
+        carritoModal.classList.remove('activo');
       }
     });
 
