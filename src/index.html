@@ -1,0 +1,1484 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <title>[El Rincón De Mama Inés] – Pastelería artesanal en ALcobendas</title>
+
+  <!-- Meta SEO -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description"
+        content="Pastelería artesanal en Alcobendas, San Sebastián de los Reyes, madrid norte. Tartas, roscones y dulces caseros elaborados a diario con ingredientes naturales." />
+  <meta name="keywords"
+        content="pastelería artesanal, repostería, dulces caseros, tartas, roscones, Alcobendas, San Sebastián de los Reyes, madrid norte." />
+
+  <!-- Tipografías Google (estilo artesanal y elegante) -->
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&family=Nunito:wght@300;400;600&display=swap" rel="stylesheet">
+
+  <!-- Estilos -->
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <!-- HEADER -->
+    <!-- BANNER -->
+    <div class="banner">
+      <img src="https://github.com/comarni/ElRinconDeMamaInes/blob/main/img/logo.png?raw=true" alt="Banner El Rincón De Mamá Inés" class="banner-img">
+    </div>
+
+  <header>
+    <div class="contenedor nav">
+      <div class="logo">
+        El  Rincón De Mamá Inés
+        <span>Pastelería artesanal en Alcobendas</span>
+      </div>
+      <nav class="nav-links">
+        <a href="#inicio">Inicio</a>
+        <a href="#carta">Carta</a>
+        <a href="#eventos">Eventos</a>
+        <a href="#sobre">Sobre nosotros</a>
+        <a href="#contacto">Pedidos</a>
+        <div class="nav-carrito-wrapper">
+          <button class="nav-carrito" id="btnCarrito" title="Ver cesta">
+            🛒 <span id="contadorCarrito">0</span>
+          </button>
+          <div class="carrito-modal" id="carritoModal">
+            <div class="carrito-contenido">
+              <h3>Tu cesta</h3>
+              <div id="itemsCarrito" class="carrito-items"></div>
+              <div class="carrito-total">
+                <strong>Total: <span id="totalCarrito">0.00</span> €</strong>
+              </div>
+              <button class="btn" id="btnPedido" style="width: 100%; margin-top: 1rem;">Hacer pedido</button>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </div>
+  </header>
+
+  <!-- INICIO -->
+  <section id="inicio">
+    <div class="contenedor hero">
+      <div class="hero-texto fade-up">
+        <div class="hero-badges">
+          <div class="badge"><span>🍰</span> Hecho a mano cada día</div>
+          <div class="badge"><span>🌿</span> Ingredientes naturales</div>
+          <div class="badge"><span>🎂</span> Tartas a medida</div>
+        </div>
+
+        <h1>Dulces momentos en El  Rincón De Mamá Inés<span></span></h1>
+        <p>
+          En nuestra pastelería artesanal elaboramos cada pieza con mimo, recetas de siempre y materias primas de calidad.
+          Creemos en los pequeños detalles que convierten un dulce en un recuerdo.
+        </p>
+
+        <div class="hero-botones">
+          <a href="#carta" class="btn">Ver carta <span>→</span></a>
+          <a href="#contacto" class="btn btn-outline">Encargar un pedido</a>
+        </div>
+      </div>
+
+      <div class="hero-imagen fade-up">
+        <div class="hero-card">
+          <div class="hero-card-header">
+            <h2>Un vistazo a nuestros dulces</h2>
+            <div class="hero-chip">
+              <div class="hero-chip-dot"></div>
+              Hoy horneamos
+            </div>
+          </div>
+
+          <div class="hero-productos">
+            <div class="mini-card">
+              <div class="mini-card-img">
+                <img src="https://github.com/comarni/ElRinconDeMamaInes/blob/main/img/rosconOriginal.jpeg?raw=true" alt="Roscones">
+                <div class="mini-badge">🌟</div>
+              </div>
+              <div class="mini-card-content">
+                <strong>Roscones</strong>
+                <span class="mini-tag">Todo el año</span>
+                <span class="mini-price">Desde 7 €</span>
+              </div>
+            </div>
+            <div class="mini-card">
+              <div class="mini-card-img">
+                <img src="https://github.com/comarni/ElRinconDeMamaInes/blob/main/img/tartaChoco.jpeg?raw=true" alt="Tartas">
+                <div class="mini-badge">🎂</div>
+              </div>
+              <div class="mini-card-content">
+                <strong>Tartas</strong>
+                <span class="mini-tag">Cumpleaños</span>
+                <span class="mini-price">Desde 6 €</span>
+              </div>
+            </div>
+            <div class="mini-card">
+              <div class="mini-card-img">
+                <img src="https://github.com/comarni/ElRinconDeMamaInes/blob/main/img/rosconKinder.jpeg?raw=true" alt="Especial">
+                <div class="mini-badge">✨</div>
+              </div>
+              <div class="mini-card-content">
+                <strong>Especial mes</strong>
+                <span class="mini-tag">Sabor sorpresa</span>
+                <span class="mini-price-special">Edición limitada</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="hero-card-footer">
+            <span>Reserva con 48 h de antelación para tartas personalizadas.</span>
+            <span class="hero-badge-dest">🎉 Ideal para celebraciones</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CARRUSEL VISUAL (fotos y vídeos) -->
+  <section id="showcase" class="showcase">
+    <div class="carousel">
+      <div class="slides">
+        <div class="slide">
+          <img src="https://github.com/comarni/ElRinconDeMamaInes/blob/main/img/fresaBa%C3%B1ada.jpeg?raw=true" alt="Tarta ejemplo 1">
+        </div>
+        <div class="slide">
+          <img src="https://github.com/comarni/ElRinconDeMamaInes/blob/main/img/rosconKinder.jpeg?raw=true" alt="Tarta ejemplo 1">
+        </div>
+        <div class="slide">
+          <video muted playsinline preload="metadata" controlsList="nodownload" poster="https://github.com/comarni/ElRinconDeMamaInes/blob/main/img/rosconNata.jpeg?raw=true">
+            <source src="https://github.com/comarni/ElRinconDeMamaInes/blob/main/img/tartaChoco.mp4?raw=true" type="video/mp4">
+          </video>
+        </div>
+        <div class="slide">
+          <img src="https://github.com/comarni/ElRinconDeMamaInes/blob/main/img/cora.jpeg?raw=true" alt="Tarta ejemplo 2">
+        </div>
+      </div>
+
+      <button class="carousel-control prev" aria-label="Anterior">‹</button>
+      <button class="carousel-control next" aria-label="Siguiente">›</button>
+
+      <div class="carousel-dots" aria-hidden="true"></div>
+    </div>
+  </section>
+
+  <!-- CARTA / MENÚ -->
+  <section id="carta">
+    <div class="contenedor">
+      <h2>Nuestra carta artesanal</h2>
+      <p class="section-subtitle">
+        Roscones de lujo, tartas caseras y dulces pensados para compartir. Pregúntanos por opciones sin gluten o sin lactosa.
+      </p>
+
+      <!-- Pestañas de categorías -->
+      <div class="tabs-menu">
+        <button class="tab-btn active" data-tab="roscones">Roscones</button>
+        <button class="tab-btn" data-tab="tartas">Tartas</button>
+      
+      </div>
+
+      <!-- ROSCONES -->
+      <div class="menu-tab" id="tab-roscones">
+        <div class="menu-grid">
+          <!-- Ejemplo de producto; adapta los nombres y precios a tu carta real -->
+          <article class="menu-card destacado">
+            <div class="menu-card-imagen">
+              <img src="https://github.com/comarni/ElRinconDeMamaInes/blob/main/img/rosconOriginal.jpeg?raw=true" alt="Roscón original">
+            </div>
+            <div class="menu-card-contenido">
+              <div class="menu-titulo">Roscón original</div>
+              <div class="menu-etiqueta">Clásico, esponjoso y aromático.</div>
+              <p class="menu-detalle">
+                Nuestra masa tradicional de roscón, fermentación lenta y suave aroma a azahar. Perfecto para acompañar con chocolate caliente.
+              </p>
+              <div class="menu-precios">
+                <span>Mini 150 g · 7 €</span>
+                <span>250 g · 13 €</span>
+                <span>500 g · 25 €</span>
+                <span>1 kg · 35 €</span>
+              </div>
+              <div class="producto-selectors">
+                <select class="selector-tamaño" data-producto="Roscón original" data-precios="7|13|25|35">
+                  <option value="0">Mini 150g - 7€</option>
+                  <option value="1">250g - 13€</option>
+                  <option value="2">500g - 25€</option>
+                  <option value="3">1kg - 35€</option>
+                </select>
+                <input type="number" class="cantidad-input" min="1" max="99" value="1" placeholder="Cantidad">
+                <button class="btn-agregar" data-producto="Roscón original">Agregar</button>
+              </div>
+            </div>
+          </article>
+
+          <article class="menu-card">
+            <div class="menu-card-imagen">
+              <img src="https://github.com/comarni/ElRinconDeMamaInes/blob/main/img/rosconNataTrufa.jpeg?raw=true" alt="Roscón de nata">
+            </div>
+            <div class="menu-card-contenido">
+              <div class="menu-titulo">Roscón de nata / trufa / crema</div>
+              <div class="menu-etiqueta">Rellenos cremosos, listos para celebrar.</div>
+              <p class="menu-detalle">
+                Elige entre nata montada, trufa o crema pastelera casera. Ideal para compartir en familia o en la oficina.
+              </p>
+              <div class="menu-precios">
+                <span>Mini 150 g · 8 €</span>
+                <span>250 g · 15 €</span>
+                <span>500 g · 28 €</span>
+                <span>1 kg · 40 €</span>
+              </div>
+              <div class="producto-selectors">
+                <select class="selector-tamaño" data-producto="Roscón de nata / trufa / crema" data-precios="8|15|28|40">
+                  <option value="0">Mini 150g - 8€</option>
+                  <option value="1">250g - 15€</option>
+                  <option value="2">500g - 28€</option>
+                  <option value="3">1kg - 40€</option>
+                </select>
+                <input type="number" class="cantidad-input" min="1" max="99" value="1" placeholder="Cantidad">
+                <button class="btn-agregar" data-producto="Roscón de nata / trufa / crema">Agregar</button>
+              </div>
+            </div>
+          </article>
+
+          <article class="menu-card">
+            <div class="menu-card-imagen">
+              <img src="https://github.com/comarni/ElRinconDeMamaInes/blob/main/img/rosconKinder2.jpeg?raw=true" alt="Roscón Kinder Bueno">
+            </div>
+            <div class="menu-card-contenido">
+              <div class="menu-titulo">Roscón Kinder Bueno</div>
+              <div class="menu-etiqueta">Para amantes del chocolate.</div>
+              <p class="menu-detalle">
+                Masa tierna rellena con crema inspirada en Kinder Bueno y cobertura de chocolate suave.
+              </p>
+              <div class="menu-precios">
+                <span>Mini 150 g · 9 €</span>
+                <span>250 g · 17 €</span>
+                <span>500 g · 30 €</span>
+                <span>1 kg · 45 €</span>
+              </div>
+              <div class="producto-selectors">
+                <select class="selector-tamaño" data-producto="Roscón Kinder Bueno" data-precios="9|17|30|45">
+                  <option value="0">Mini 150g - 9€</option>
+                  <option value="1">250g - 17€</option>
+                  <option value="2">500g - 30€</option>
+                  <option value="3">1kg - 45€</option>
+                </select>
+                <input type="number" class="cantidad-input" min="1" max="99" value="1" placeholder="Cantidad">
+                <button class="btn-agregar" data-producto="Roscón Kinder Bueno">Agregar</button>
+              </div>
+            </div>
+          </article>
+
+          <article class="menu-card">
+            <div class="menu-card-imagen">
+              <img src="https://github.com/comarni/ElRinconDeMamaInes/blob/main/img/rosconLotus.jpeg?raw=true" alt="Roscón Lotus">
+            </div>
+            <div class="menu-card-contenido">
+              <div class="menu-titulo">Roscón Lotus</div>
+              <div class="menu-etiqueta">Toque especiado y caramelizado.</div>
+              <p class="menu-detalle">
+                Relleno de crema Lotus con topping crujiente de galleta. Un equilibrio perfecto entre dulce y especias suaves.
+              </p>
+              <div class="menu-precios">
+                <span>Mini 150 g · 9 €</span>
+                <span>250 g · 17 €</span>
+                <span>500 g · 30 €</span>
+                <span>1 kg · 45 €</span>
+              </div>
+              <div class="producto-selectors">
+                <select class="selector-tamaño" data-producto="Roscón Lotus" data-precios="9|17|30|45">
+                  <option value="0">Mini 150g - 9€</option>
+                  <option value="1">250g - 17€</option>
+                  <option value="2">500g - 30€</option>
+                  <option value="3">1kg - 45€</option>
+                </select>
+                <input type="number" class="cantidad-input" min="1" max="99" value="1" placeholder="Cantidad">
+                <button class="btn-agregar" data-producto="Roscón Lotus">Agregar</button>
+              </div>
+            </div>
+          </article>
+
+          <article class="menu-card">
+            <div class="menu-card-imagen">
+              <img src="https://github.com/comarni/ElRinconDeMamaInes/blob/main/img/rosconRedVelvet.jpeg?raw=true" alt="Roscón Red Velvet">
+            </div>
+            <div class="menu-card-contenido">
+              <div class="menu-titulo">Roscón Red Velvet</div>
+              <div class="menu-etiqueta">Color intenso, corazón de cacao.</div>
+              <p class="menu-detalle">
+                Masa tipo Red Velvet con suave crema de queso, perfecto para ocasiones especiales.
+              </p>
+              <div class="menu-precios">
+                <span>Mini 150 g · 9 €</span>
+                <span>250 g · 17 €</span>
+                <span>500 g · 30 €</span>
+                <span>1 kg · 45 €</span>
+              </div>
+              <div class="producto-selectors">
+                <select class="selector-tamaño" data-producto="Roscón Red Velvet" data-precios="9|17|30|45">
+                  <option value="0">Mini 150g - 9€</option>
+                  <option value="1">250g - 17€</option>
+                  <option value="2">500g - 30€</option>
+                  <option value="3">1kg - 45€</option>
+                </select>
+                <input type="number" class="cantidad-input" min="1" max="99" value="1" placeholder="Cantidad">
+                <button class="btn-agregar" data-producto="Roscón Red Velvet">Agregar</button>
+              </div>
+            </div>
+          </article>
+
+          <article class="menu-card">
+            <div class="menu-card-imagen">
+              <img src="https://github.com/comarni/ElRinconDeMamaInes/blob/main/img/tartaOreo.jpeg?raw=true" alt="Roscón Oreo">
+            </div>
+            <div class="menu-card-contenido">
+              <div class="menu-titulo">Roscón Oreo</div>
+              <div class="menu-etiqueta">Galleta y crema en cada bocado.</div>
+              <p class="menu-detalle">
+                Relleno de crema de Oreo y trocitos de galleta, ideal para los más pequeños (y no tan pequeños).
+              </p>
+              <div class="menu-precios">
+                <span>Mini 150 g · 9 €</span>
+                <span>250 g · 17 €</span>
+                <span>500 g · 30 €</span>
+                <span>1 kg · 45 €</span>
+              </div>
+              <div class="producto-selectors">
+                <select class="selector-tamaño" data-producto="Roscón Oreo" data-precios="9|17|30|45">
+                  <option value="0">Mini 150g - 9€</option>
+                  <option value="1">250g - 17€</option>
+                  <option value="2">500g - 30€</option>
+                  <option value="3">1kg - 45€</option>
+                </select>
+                <input type="number" class="cantidad-input" min="1" max="99" value="1" placeholder="Cantidad">
+                <button class="btn-agregar" data-producto="Roscón Oreo">Agregar</button>
+              </div>
+            </div>
+          </article>
+
+          <article class="menu-card">
+            <div class="menu-card-imagen">
+              <img src="https://github.com/comarni/ElRinconDeMamaInes/blob/main/img/rosconPinkPant.jpeg?raw=true" alt="Roscón Pink Panther">
+            </div>
+            <div class="menu-card-contenido">
+              <div class="menu-titulo">Roscón Pink Panther</div>
+              <div class="menu-etiqueta">Rosa, divertido y muy suave.</div>
+              <p class="menu-detalle">
+                Masa esponjosa con crema rosa de sabor delicado, un clásico de nuestra vitrina.
+              </p>
+              <div class="menu-precios">
+                <span>Mini 150 g · 9 €</span>
+                <span>250 g · 17 €</span>
+                <span>500 g · 30 €</span>
+                <span>1 kg · 45 €</span>
+              </div>
+              <div class="producto-selectors">
+                <select class="selector-tamaño" data-producto="Roscón Pink Panther" data-precios="9|17|30|45">
+                  <option value="0">Mini 150g - 9€</option>
+                  <option value="1">250g - 17€</option>
+                  <option value="2">500g - 30€</option>
+                  <option value="3">1kg - 45€</option>
+                </select>
+                <input type="number" class="cantidad-input" min="1" max="99" value="1" placeholder="Cantidad">
+                <button class="btn-agregar" data-producto="Roscón Pink Panther">Agregar</button>
+              </div>
+            </div>
+          </article>
+
+          <article class="menu-card">
+            <div class="menu-card-imagen">
+              <img src="https://github.com/comarni/ElRinconDeMamaInes/blob/main/img/rosconFerrero.jpeg?raw=true" alt="Roscón Ferrero">
+            </div>
+            <div class="menu-card-contenido">
+              <div class="menu-titulo">Roscón Ferrero</div>
+              <div class="menu-etiqueta">Avellana y chocolate premium.</div>
+              <p class="menu-detalle">
+                Inspirado en el clásico bombón, con crema de avellanas y cobertura crujiente.
+              </p>
+              <div class="menu-precios">
+                <span>Mini 150 g · 9 €</span>
+                <span>250 g · 17 €</span>
+                <span>500 g · 30 €</span>
+                <span>1 kg · 45 €</span>
+              </div>
+              <div class="producto-selectors">
+                <select class="selector-tamaño" data-producto="Roscón Ferrero" data-precios="9|17|30|45">
+                  <option value="0">Mini 150g - 9€</option>
+                  <option value="1">250g - 17€</option>
+                  <option value="2">500g - 30€</option>
+                  <option value="3">1kg - 45€</option>
+                </select>
+                <input type="number" class="cantidad-input" min="1" max="99" value="1" placeholder="Cantidad">
+                <button class="btn-agregar" data-producto="Roscón Ferrero">Agregar</button>
+              </div>
+            </div>
+          </article>
+
+          <article class="menu-card destacado">
+            <div class="menu-card-imagen">
+              <img src="https://github.com/comarni/ElRinconDeMamaInes/blob/main/img/rosconNata.jpeg?raw=true" alt="Roscón especial del mes">
+            </div>
+            <div class="menu-card-contenido">
+              <div class="menu-titulo">Roscón especial del mes</div>
+              <div class="menu-etiqueta">Sabor limitado, según temporada.</div>
+              <p class="menu-detalle">
+                Cada mes creamos un roscón diferente inspirado en frutas de temporada o combinaciones sorprendentes. Pregunta por el sabor disponible.
+              </p>
+              <div class="menu-precios">
+                <span>Mini 150 g · 10 €</span>
+                <span>250 g · 18 €</span>
+                <span>500 g · 32 €</span>
+                <span>1 kg · 47 €</span>
+              </div>
+              <div class="producto-selectors">
+                <select class="selector-tamaño" data-producto="Roscón especial del mes" data-precios="10|18|32|47">
+                  <option value="0">Mini 150g - 10€</option>
+                  <option value="1">250g - 18€</option>
+                  <option value="2">500g - 32€</option>
+                  <option value="3">1kg - 47€</option>
+                </select>
+                <input type="number" class="cantidad-input" min="1" max="99" value="1" placeholder="Cantidad">
+                <button class="btn-agregar" data-producto="Roscón especial del mes">Agregar</button>
+              </div>
+              <div class="etiqueta-mes">🌸 Edición limitada del mes</div>
+            </div>
+          </article>
+        </div>
+      </div>
+
+      <!-- TARTAS -->
+      <div class="menu-tab" id="tab-tartas" style="display:none;">
+        <div class="menu-grid">
+          <article class="menu-card destacado">
+            <div class="menu-card-imagen">
+              <img src="https://github.com/comarni/ElRinconDeMamaInes/blob/main/img/tartaChoco.jpeg?raw=true" alt="Tarta de chocolate">
+            </div>
+            <div class="menu-card-contenido">
+              <div class="menu-titulo">Tarta de chocolate</div>
+              <div class="menu-etiqueta">Esponjosa, intensa y muy casera.</div>
+              <p class="menu-detalle">
+                Bizcocho de cacao con relleno cremoso y cobertura brillante de chocolate. Disponible en varios tamaños para adaptarse a tu celebración.
+              </p>
+              <div class="menu-precios">
+                <span>Porción · 7 €</span>
+                <span>2‑3 raciones · 18 €</span>
+                <span>5‑6 raciones · 26 €</span>
+                <span>7‑8 raciones · 34 €</span>
+                <span>8‐10 raciones · 39 €</span>
+                <span>10‐12 raciones · 46 €</span>
+                <span>12‐18 raciones · 52 €</span>
+              </div>
+              <div class="producto-selectors">
+                <select class="selector-tamaño" data-producto="Tarta de chocolate" data-precios="7|18|26|34|39|46|52">
+                  <option value="0">Porción - 7€</option>
+                  <option value="1">2-3 raciones - 18€</option>
+                  <option value="2">5-6 raciones - 26€</option>
+                  <option value="3">7-8 raciones - 34€</option>
+                  <option value="4">8-10 raciones - 39€</option>
+                  <option value="5">10-12 raciones - 46€</option>
+                  <option value="6">12-18 raciones - 52€</option>
+                </select>
+                <input type="number" class="cantidad-input" min="1" max="99" value="1" placeholder="Cantidad">
+                <button class="btn-agregar" data-producto="Tarta de chocolate">Agregar</button>
+              </div>
+            </div>
+          </article>
+
+          <article class="menu-card">
+            <div class="menu-card-imagen">
+              <img src="https://github.com/comarni/ElRinconDeMamaInes/blob/main/img/tartaQueso.jpeg?raw=true" alt="Tarta de queso">
+            </div>
+            <div class="menu-card-contenido">
+              <div class="menu-titulo">Tarta de queso</div>
+              <div class="menu-etiqueta">Cremosa, al horno.</div>
+              <p class="menu-detalle">
+                Tarta de queso estilo casero, ligeramente tostada, con base crujiente de galleta. Puedes añadir coulis de frutos rojos.
+              </p>
+              <div class="menu-precios">
+                <span>Porción · 7 €</span>
+                <span>2†3 raciones · 18 €</span>
+                <span>5†6 raciones · 26 €</span>
+                <span>7†8 raciones · 34 €</span>
+                <span>8‐10 raciones · 39 €</span>
+                <span>10‐12 raciones · 46 €</span>
+                <span>12‐18 raciones · 52 €</span>
+              </div>
+              <div class="producto-selectors">
+                <select class="selector-tamaño" data-producto="Tarta de queso" data-precios="7|18|26|34|39|46|52">
+                  <option value="0">Porción - 7€</option>
+                  <option value="1">2-3 raciones - 18€</option>
+                  <option value="2">5-6 raciones - 26€</option>
+                  <option value="3">7-8 raciones - 34€</option>
+                  <option value="4">8-10 raciones - 39€</option>
+                  <option value="5">10-12 raciones - 46€</option>
+                  <option value="6">12-18 raciones - 52€</option>
+                </select>
+                <input type="number" class="cantidad-input" min="1" max="99" value="1" placeholder="Cantidad">
+                <button class="btn-agregar" data-producto="Tarta de queso">Agregar</button>
+              </div>
+            </div>
+          </article>
+
+          <article class="menu-card">
+            <div class="menu-card-imagen">
+              <img src="https://github.com/comarni/ElRinconDeMamaInes/blob/main/img/tartaZanah.jpeg?raw=true" alt="Tarta de zanahoria">
+            </div>
+            <div class="menu-card-contenido">
+              <div class="menu-titulo">Tarta de zanahoria</div>
+              <div class="menu-etiqueta">Con nueces y crema suave.</div>
+              <p class="menu-detalle">
+                Bizcocho húmedo de zanahoria con especias suaves y frosting de queso crema. Una opción equilibrada y muy aromática.
+              </p>
+              <div class="menu-precios">
+                <span>Porción · 6 €</span>
+                <span>2†3 raciones · 17 €</span>
+                <span>5†6 raciones · 25 €</span>
+                <span>7†8 raciones · 33 €</span>
+                <span>8‐10 raciones · 38 €</span>
+                <span>10‐12 raciones · 45 €</span>
+                <span>12‐18 raciones · 50 €</span>
+              </div>
+              <div class="producto-selectors">
+                <select class="selector-tamaño" data-producto="Tarta de zanahoria" data-precios="6|17|25|33|38|45|50">
+                  <option value="0">Porción - 6€</option>
+                  <option value="1">2-3 raciones - 17€</option>
+                  <option value="2">5-6 raciones - 25€</option>
+                  <option value="3">7-8 raciones - 33€</option>
+                  <option value="4">8-10 raciones - 38€</option>
+                  <option value="5">10-12 raciones - 45€</option>
+                  <option value="6">12-18 raciones - 50€</option>
+                </select>
+                <input type="number" class="cantidad-input" min="1" max="99" value="1" placeholder="Cantidad">
+                <button class="btn-agregar" data-producto="Tarta de zanahoria">Agregar</button>
+              </div>
+            </div>
+          </article>
+
+          <article class="menu-card">
+            <div class="menu-card-imagen">
+              <img src="https://github.com/comarni/ElRinconDeMamaInes/blob/main/img/tartaKinder.jpeg?raw=true" alt="Tarta Kinder Bueno">
+            </div>
+            <div class="menu-card-contenido">
+              <div class="menu-titulo">Tarta Kinder Bueno</div>
+              <div class="menu-etiqueta">Rellena de crema Kinder.</div>
+              <p class="menu-detalle">
+                Para fans de este clásico chocolate: bizcocho suave con capas de crema inspirada en Kinder y decoración temática.
+              </p>
+              <div class="menu-precios">
+                <span>Porción · 6 €</span>
+                <span>2†3 raciones · 17 €</span>
+                <span>5†6 raciones · 25 €</span>
+                <span>7†8 raciones · 33 €</span>
+                <span>8‐10 raciones · 38 €</span>
+                <span>10‐12 raciones · 45 €</span>
+                <span>12‐18 raciones · 50 €</span>
+              </div>
+              <div class="producto-selectors">
+                <select class="selector-tamaño" data-producto="Tarta Kinder Bueno" data-precios="6|17|25|33|38|45|50">
+                  <option value="0">Porción - 6€</option>
+                  <option value="1">2-3 raciones - 17€</option>
+                  <option value="2">5-6 raciones - 25€</option>
+                  <option value="3">7-8 raciones - 33€</option>
+                  <option value="4">8-10 raciones - 38€</option>
+                  <option value="5">10-12 raciones - 45€</option>
+                  <option value="6">12-18 raciones - 50€</option>
+                </select>
+                <input type="number" class="cantidad-input" min="1" max="99" value="1" placeholder="Cantidad">
+                <button class="btn-agregar" data-producto="Tarta Kinder Bueno">Agregar</button>
+              </div>
+            </div>
+          </article>
+
+          <article class="menu-card">
+            <div class="menu-card-imagen">
+              <img src="https://images.unsplash.com/photo-1578985545062-69928b1d9587?w=400&h=300&fit=crop" alt="Tarta Bailys">
+            </div>
+            <div class="menu-card-contenido">
+              <div class="menu-titulo">Tarta Bailys</div>
+              <div class="menu-etiqueta">Suave toque licoroso.</div>
+              <p class="menu-detalle">
+                Tarta cremosa con ligero toque de licor Bailys, perfecta para sobremesas de adultos.
+              </p>
+              <div class="menu-precios">
+                <span>Porción · 6 €</span>
+                <span>2†3 raciones · 17 €</span>
+                <span>5†6 raciones · 25 €</span>
+                <span>7†8 raciones · 33 €</span>
+                <span>8‐10 raciones · 38 €</span>
+                <span>10‐12 raciones · 45 €</span>
+                <span>12‐18 raciones · 50 €</span>
+              </div>
+              <div class="producto-selectors">
+                <select class="selector-tamaño" data-producto="Tarta Bailys" data-precios="6|17|25|33|38|45|50">
+                  <option value="0">Porción - 6€</option>
+                  <option value="1">2-3 raciones - 17€</option>
+                  <option value="2">5-6 raciones - 25€</option>
+                  <option value="3">7-8 raciones - 33€</option>
+                  <option value="4">8-10 raciones - 38€</option>
+                  <option value="5">10-12 raciones - 45€</option>
+                  <option value="6">12-18 raciones - 50€</option>
+                </select>
+                <input type="number" class="cantidad-input" min="1" max="99" value="1" placeholder="Cantidad">
+                <button class="btn-agregar" data-producto="Tarta Bailys">Agregar</button>
+              </div>
+            </div>
+          </article>
+
+          <article class="menu-card">
+            <div class="menu-card-imagen">
+              <img src="https://github.com/comarni/ElRinconDeMamaInes/blob/main/img/tartaDulce.jpeg?raw=true" alt="Tarta dulce de leche">
+            </div>
+            <div class="menu-card-contenido">
+              <div class="menu-titulo">Tarta dulce de leche</div>
+              <div class="menu-etiqueta">Caramelo cremoso en cada capa.</div>
+              <p class="menu-detalle">
+                Capas de bizcocho vainilla con relleno abundante de dulce de leche y cobertura suave.
+              </p>
+              <div class="menu-precios">
+                <span>Porción · 6 €</span>
+                <span>2‑3 raciones · 17 €</span>
+                <span>5‑6 raciones · 25 €</span>
+                <span>7‑8 raciones · 33 €</span>
+                <span>8‐10 raciones · 38 €</span>
+                <span>10‐12 raciones · 45 €</span>
+                <span>12‐18 raciones · 50 €</span>
+              </div>
+              <div class="producto-selectors">
+                <select class="selector-tamaño" data-producto="Tarta dulce de leche" data-precios="6|17|25|33|38|45|50">
+                  <option value="0">Porción - 6€</option>
+                  <option value="1">2-3 raciones - 17€</option>
+                  <option value="2">5-6 raciones - 25€</option>
+                  <option value="3">7-8 raciones - 33€</option>
+                  <option value="4">8-10 raciones - 38€</option>
+                  <option value="5">10-12 raciones - 45€</option>
+                  <option value="6">12-18 raciones - 50€</option>
+                </select>
+                <input type="number" class="cantidad-input" min="1" max="99" value="1" placeholder="Cantidad">
+                <button class="btn-agregar" data-producto="Tarta dulce de leche">Agregar</button>
+              </div>
+            </div>
+          </article>
+
+          <article class="menu-card">
+            <div class="menu-card-imagen">
+              <img src="https://images.unsplash.com/photo-1578985545062-69928b1d9587?w=400&h=300&fit=crop" alt="Tarta café moca">
+            </div>
+            <div class="menu-card-contenido">
+              <div class="menu-titulo">Tarta café / moca</div>
+              <div class="menu-etiqueta">Equilibrio perfecto entre café y cacao.</div>
+              <p class="menu-detalle">
+                Para amantes del café, con notas suaves de espresso y cacao en una tarta cremosa.
+              </p>
+              <div class="menu-precios">
+                <span>Porción · 6 €</span>
+                <span>2‑3 raciones · 17 €</span>
+                <span>5‑6 raciones · 25 €</span>
+                <span>7‑8 raciones · 33 €</span>
+                <span>8‐10 raciones · 38 €</span>
+                <span>10‐12 raciones · 45 €</span>
+                <span>12‐18 raciones · 50 €</span>
+              </div>
+              <div class="producto-selectors">
+                <select class="selector-tamaño" data-producto="Tarta café / moca" data-precios="6|17|25|33|38|45|50">
+                  <option value="0">Porción - 6€</option>
+                  <option value="1">2-3 raciones - 17€</option>
+                  <option value="2">5-6 raciones - 25€</option>
+                  <option value="3">7-8 raciones - 33€</option>
+                  <option value="4">8-10 raciones - 38€</option>
+                  <option value="5">10-12 raciones - 45€</option>
+                  <option value="6">12-18 raciones - 50€</option>
+                </select>
+                <input type="number" class="cantidad-input" min="1" max="99" value="1" placeholder="Cantidad">
+                <button class="btn-agregar" data-producto="Tarta café / moca">Agregar</button>
+              </div>
+            </div>
+          </article>
+
+          <article class="menu-card destacado">
+            <div class="menu-card-imagen">
+              <img src="https://github.com/comarni/ElRinconDeMamaInes/blob/main/img/tartaRedVelvet.jpeg?raw=true" alt="Tarta Red Velvet">
+            </div>
+            <div class="menu-card-contenido">
+              <div class="menu-titulo">Tarta Red Velvet</div>
+              <div class="menu-etiqueta">Color intenso, corazón de cacao.</div>
+              <p class="menu-detalle">
+               Masa tipo Red Velvet con suave crema de queso, perfecto para ocasiones especiales.
+              </p>
+              <div class="menu-precios">
+                <span>Porción · 7 €</span>
+                <span>2†3 raciones · 18 €</span>
+                <span>5†6 raciones · 26 €</span>
+                <span>7†8 raciones · 33 €</span>
+                <span>8‐10 raciones · 38 €</span>
+                <span>10‐12 raciones · 45 €</span>
+                <span>12‐18 raciones · 50 €</span>
+              </div>
+              <div class="etiqueta-mes">🍰 Consulta sabores disponibles</div>
+            </div>
+          </article>
+        </div>
+      </div>
+
+      <!-- ESPECIAL TEMPORADA / OTROS DULCES -->
+      <div class="menu-tab" id="tab-temporada" style="display:none;">
+        <div class="menu-grid">
+          <article class="menu-card destacado">
+            <div class="menu-card-imagen">
+              <img src="https://images.unsplash.com/photo-1578985545062-69928b1d9587?w=400&h=300&fit=crop" alt="Ediciones de temporada">
+            </div>
+            <div class="menu-card-contenido">
+              <div class="menu-titulo">Ediciones de temporada</div>
+              <div class="menu-etiqueta">Navidad, San Valentín, comuniones y más.</div>
+              <p class="menu-detalle">
+                Diseñamos colecciones especiales de tartas, roscones y dulces decorados para las fechas señaladas.
+                Consulta en tienda o por WhatsApp las propuestas actuales y packs para eventos.
+              </p>
+            </div>
+          </article>
+
+          <article class="menu-card">
+            <div class="menu-card-imagen">
+              <img src="https://images.unsplash.com/photo-1578985545062-69928b1d9587?w=400&h=300&fit=crop" alt="Detalles dulces para eventos">
+            </div>
+            <div class="menu-card-contenido">
+              <div class="menu-titulo">Detalles dulces para eventos</div>
+              <div class="menu-etiqueta">Mesas dulces, cupcakes, mini tartaletas, galletas decoradas.</div>
+              <p class="menu-detalle">
+                Prepararemos un surtido a tu medida para cumpleaños, bautizos, comuniones o eventos de empresa.
+                Coméntanos el número de invitados y estilo que buscas.
+              </p>
+            </div>
+          </article>
+        </div>
+      </div>
+
+      <p class="section-subtitle" style="margin-top:2rem;">
+        ¿Buscas algo que no ves en la carta? Escríbenos y lo creamos juntos.
+      </p>
+    </div>
+  </section>
+
+  <!-- EVENTOS PERSONALIZADOS -->
+  <section id="eventos" class="eventos-section">
+    <div class="contenedor">
+      <div class="eventos-header">
+        <h2>Creaciones a medida para tu evento</h2>
+        <p class="section-subtitle">
+          Tartas y roscones personalizados para bodas, cumpleaños, eventos deportivos, bodas universitarias, bautizos y cualquier celebración especial.
+        </p>
+      </div>
+
+      <!-- Grid de tipos de eventos -->
+      <div class="eventos-grid">
+        <div class="evento-card">
+          <div class="evento-icon">🎂</div>
+          <h3>Cumpleaños</h3>
+          <p>Tartas personalizadas con nombres, edades, colores y diseños únicos para cada cumpleañero.</p>
+        </div>
+        <div class="evento-card">
+          <div class="evento-icon">💍</div>
+          <h3>Bodas</h3>
+          <p>Creaciones elegantes y sofisticadas para el día más importante. Consulta nuestras opciones de pisos y diseños.</p>
+        </div>
+        <div class="evento-card">
+          <div class="evento-icon">👶</div>
+          <h3>Bautizos</h3>
+          <p>Roscones y tartas delicadas con toques tradicionales y modernos para celebrar nuevas llegadas.</p>
+        </div>
+        <div class="evento-card">
+          <div class="evento-icon">🏆</div>
+          <h3>Eventos deportivos</h3>
+          <p>Tartas con escudos, colores de equipos y diseños temáticos para celebrar victorias y logros.</p>
+        </div>
+        <div class="evento-card">
+          <div class="evento-icon">🎓</div>
+          <h3>Eventos universitarios</h3>
+          <p>Promociones, graduaciones y despedidas de soltero/a con diseños originales y temáticos.</p>
+        </div>
+        <div class="evento-card">
+          <div class="evento-icon">🎉</div>
+          <h3>Celebraciones especiales</h3>
+          <p>Comuniones, aniversarios, cenas de empresa, brindis y cualquier moment que quieras hacer especial.</p>
+        </div>
+      </div>
+
+      <!-- Galería de proyectos -->
+      <div class="eventos-gallery-section">
+        <h3 style="text-align: center; margin-bottom: 2rem;">Algunos de nuestros proyectos</h3>
+        
+        <div class="eventos-gallery">
+          <!-- Tarjeta de galería tipo 1: Imagen con descripción hover -->
+          <div class="gallery-item tall">
+            <div class="gallery-img-wrapper">
+              <img src="https://github.com/comarni/ElRinconDeMamaInes/blob/main/img/lucia2.jpeg?raw=true" alt="Tarta personalizada">
+              <div class="gallery-overlay">
+                <div class="gallery-overlay-content">
+                  <h4>Tarta Cumpleaños</h4>
+                  <p>Diseño floral con fresas frescas</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        <!-- Tarjeta de galería tipo 3: Imagen -->
+          <div class="gallery-item">
+            <div class="gallery-img-wrapper">
+              <img src="https://github.com/comarni/ElRinconDeMamaInes/blob/main/img/tartaCumple2.jpeg?raw=true" alt="Roscón especial">
+              <div class="gallery-overlay">
+                <div class="gallery-overlay-content">
+                  <h4>tartas originales</h4>
+                  <p>Alegrías para tu cumpleaños</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Tarjeta de galería tipo 2: Video -->
+          <div class="gallery-item">
+            <div class="gallery-img-wrapper">
+              <video autoplay muted loop playsinline controls preload="auto" controlsList="nodownload" poster="https://images.unsplash.com/photo-1578985545062-69928b1d9587?w=800&q=80&auto=format&fit=crop" style="width: 100%; height: 100%; object-fit: cover;">
+                <source src="https://github.com/comarni/ElRinconDeMamaInes/blob/main/img/tartaChoco.mp4?raw=true" type="video/mp4">
+                Tu navegador no soporta el elemento video.
+              </video>
+              <div class="gallery-overlay">
+                <div class="gallery-overlay-content">
+                  <h4>Proceso artesanal</h4>
+                  <p>Ver cómo creamos tus tartas</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+
+             <!-- Tarjeta de galería tipo 1: Imagen con descripción hover -->
+          <div class="gallery-item tall">
+            <div class="gallery-img-wrapper">
+              <img src="https://github.com/comarni/ElRinconDeMamaInes/blob/main/img/momentosQueSeCelebran.jpeg?raw=true" alt="Tarta personalizada">
+              <div class="gallery-overlay">
+                <div class="gallery-overlay-content">
+                  <h4>Tarta Cumpleaños</h4>
+                  <p>Diseño floral con fresas frescas</p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- Tarjeta de galería tipo 3: Imagen -->
+          <div class="gallery-item">
+            <div class="gallery-img-wrapper">
+              <img src="https://github.com/comarni/ElRinconDeMamaInes/blob/main/img/rosconKinder.jpeg?raw=true" alt="Roscón especial">
+              <div class="gallery-overlay">
+                <div class="gallery-overlay-content">
+                  <h4>Roscón eventos</h4>
+                  <p>Personalizado para tu evento</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Tarjeta de galería tipo 4: Imagen -->
+          <div class="gallery-item tall">
+            <div class="gallery-img-wrapper">
+              <img src="https://github.com/comarni/ElRinconDeMamaInes/blob/main/img/tartaBoda.jpeg?raw=true" alt="Tarta boda">
+              <div class="gallery-overlay">
+                <div class="gallery-overlay-content">
+                  <h4>Boda perfecta</h4>
+                  <p>Elegancia y sabor en cada piso</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Tarjeta de galería tipo 5: Imagen -->
+          <div class="gallery-item">
+            <div class="gallery-img-wrapper">
+              <img src="https://github.com/comarni/ElRinconDeMamaInes/blob/main/img/rosconOriginal.jpeg?raw=true" alt="Roscón clásico">
+              <div class="gallery-overlay">
+                <div class="gallery-overlay-content">
+                  <h4>Roscones clásicos</h4>
+                  <p>Tradición y receta original</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+           <!-- Tarjeta de galería tipo 3: Imagen -->
+          <div class="gallery-item">
+            <div class="gallery-img-wrapper">
+              <img src="https://github.com/comarni/ElRinconDeMamaInes/blob/main/img/rosconNata.jpeg?raw=true" alt="Roscón especial">
+              <div class="gallery-overlay">
+                <div class="gallery-overlay-content">
+                  <h4>Roscón eventos</h4>
+                  <p>Personalizado para tu evento</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+
+          <!-- Tarjeta de galería tipo 6: llamada a acción -->
+          <div class="gallery-item cta-item">
+            <div class="gallery-cta">
+              <div class="gallery-cta-content">
+                <h4>¿Tu evento merece algo especial?</h4>
+                <p>Contáctanos y crearemos juntos la tarta o roscón perfecto para tu celebración.</p>
+                <a href="#contacto" class="btn btn-white">Solicitar presupuesto</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Proceso de personalización -->
+      <div class="eventos-process">
+        <h3 style="text-align: center; margin-bottom: 2rem;">Cómo personalizamos tu creación</h3>
+        <div class="process-steps">
+          <div class="process-step">
+            <div class="process-number">1</div>
+            <h4>Cuéntanos tu idea</h4>
+            <p>Describe el evento, número de invitados, colores, sabor preferido y cualquier detalle especial.</p>
+          </div>
+          <div class="process-step">
+            <div class="process-number">2</div>
+            <h4>Diseñamos</h4>
+            <p>Nuestro equipo crea un diseño único adaptado a tus preferencias y presupuesto.</p>
+          </div>
+          <div class="process-step">
+            <div class="process-number">3</div>
+            <h4>Horneamos</h4>
+            <p>Elaboramos tu creación con ingredientes premium, 48 horas antes de tu evento.</p>
+          </div>
+          <div class="process-step">
+            <div class="process-number">4</div>
+            <h4>¡A celebrar!</h4>
+            <p>Entrega coordinada para que disfrutes de tu tarta o roscón en el momento perfecto.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SOBRE NOSOTROS -->
+  <section id="sobre">
+    <div class="contenedor sobre-grid">
+      <div class="sobre-texto fade-up">
+        <h2>Sobre nosotros</h2>
+        <p>
+          El Rincón De Mamá Inés nace del sueño de compartir sabores de siempre con un toque actual.
+          Hornea un pequeño equipo de reposteros que disfruta cuidando cada detalle, desde la selección de ingredientes hasta el acabado final.
+        </p>
+        <p>
+          Trabajamos con harinas de calidad, huevos frescos y materias primas cuidadosamente elegidas.
+          Evitamos los procesos industriales y preferimos las elaboraciones pausadas, como se ha hecho toda la vida.
+        </p>
+
+        <div class="sobre-recursos">
+          <div class="recurso-card">
+            <span class="recurso-kicker">Desde 2012</span>
+            <p>Horno familiar con recetas de barrio y proveedores locales.</p>
+          </div>
+          <div class="recurso-card">
+            <span class="recurso-kicker">Horneado lento</span>
+            <p>Masas reposadas y fermentaciones cuidadas para más sabor.</p>
+          </div>
+          <div class="recurso-card">
+            <span class="recurso-kicker">Detalles únicos</span>
+            <p>Decoración a mano y personalización según cada evento.</p>
+          </div>
+        </div>
+
+        <div class="sobre-valores">
+          <div class="sobre-valor">
+            <strong>Ingredientes naturales</strong>
+            Usamos materias primas seleccionadas y apostamos por proveedores de confianza.
+          </div>
+          <div class="sobre-valor">
+            <strong>Recetas tradicionales</strong>
+            Respetamos la esencia de la repostería clásica, con toques creativos y adaptados a cada temporada.
+          </div>
+          <div class="sobre-valor">
+            <strong>Atención al detalle</strong>
+            Cada tarta es única: cuidamos la presentación, los mensajes personalizados y el empaquetado.
+          </div>
+        </div>
+      </div>
+
+      <div class="sobre-galeria fade-up">
+        <div class="galeria-item tall">
+          <img src="https://github.com/comarni/ElRinconDeMamaInes/blob/main/img/namaste.jpeg?raw=true" alt="Namaste">
+          <div class="galeria-caption">
+            <span>todo tipo de diseños</span>
+            <small>Diseños especiales para cada ocasión</small>
+          </div>
+        </div>
+        <div class="galeria-item">
+          <img src="https://github.com/comarni/ElRinconDeMamaInes/blob/main/img/hippie.jpeg?raw=true" alt="Tarta personalizada">
+          <div class="galeria-caption">
+            <span>Tartas personalizadas</span>
+            <small>Mensajes y acabados a medida, el único límite es tu imaginación</small>
+          </div>
+        </div>
+        <div class="galeria-item">
+          <img src="https://github.com/comarni/ElRinconDeMamaInes/blob/main/img/bizcoLimon.jpeg?raw=true" alt="Tarta personalizada">
+          <div class="galeria-caption">
+            <span>Bizcochito de limón</span>
+            <small>con el amor más puro</small>
+          </div>
+        </div>
+        <div class="galeria-item wide">
+          <img src="https://github.com/comarni/ElRinconDeMamaInes/blob/main/img/rosconNataTrufa.jpeg?raw=true" alt="Roscones con relleno cremoso">
+          <div class="galeria-caption">
+            <span>Roscones de lujo</span>
+            <small>Rellenos suaves y coberturas brillantes</small>
+          </div>
+        </div>
+        <div class="galeria-item">
+          <img src="https://github.com/comarni/ElRinconDeMamaInes/blob/main/img/cora.jpeg?raw=true" alt="Detalles para celebraciones">
+          <div class="galeria-caption">
+            <span>Momentos que se celebran</span>
+            <small>La mesa dulce que imaginas</small>
+          </div>
+        </div>
+        <div class="galeria-item">
+          <img src="https://github.com/comarni/ElRinconDeMamaInes/blob/main/img/fresaBa%C3%B1ada.jpeg?raw=true" alt="Detalles para celebraciones">
+          <div class="galeria-caption">
+            <span>Varieda de Producto</span>
+            <small>Nos gusta hacer un poco de todo </small>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PEDIDOS Y CONTACTO -->
+  <section id="contacto">
+    <div class="contenedor contacto-grid">
+      <div class="fade-up">
+        <h2>Pedidos y contacto</h2>
+        <p class="section-subtitle">
+          Cuéntanos tu idea y te ayudamos a darle forma. Responderemos lo antes posible.
+        </p>
+
+        <form id="pedidoForm">
+          <div class="campo">
+            <label for="nombre">Nombre completo</label>
+            <input type="text" id="nombre" name="nombre" placeholder="Tu nombre" required />
+          </div>
+          <div class="campo">
+            <label for="email">Correo electrónico</label>
+            <input type="email" id="email" name="email" placeholder="tucorreo@ejemplo.com" required />
+          </div>
+          <div class="campo">
+            <label for="telefono">Teléfono</label>
+            <input type="tel" id="telefono" name="telefono" placeholder="Número de contacto" required />
+          </div>
+          <div class="campo">
+            <label for="descripcion">Descripción del pedido</label>
+            <textarea id="descripcion" name="descripcion"
+                      placeholder="Fecha del evento, tipo de tarta o roscón, número de raciones, sabores, alergias…"
+                      required></textarea>
+          </div>
+          <div class="campo">
+            <button type="submit" class="btn">Enviar solicitud <span>✉️</span></button>
+          </div>
+          <p class="nota-form">
+            Los pedidos personalizados se confirman siempre por email o teléfono.
+            Te responderemos con la mejor opción para ti.
+          </p>
+        </form>
+      </div>
+
+      <div class="contacto-info fade-up">
+        <div class="info-bloque">
+          <h3>Visítanos</h3>
+          <p>
+            El  Rincón De Mamá Inés<br>
+            Pl. del Maestro Vives, 10, 28100 <br>
+            Alcobendas, Madrid, España
+          </p>
+        </div>
+        <div class="info-bloque">
+          <h3>Horario aproximado</h3>
+          <p>
+            Lunes a viernes: 9:00 – 14:00 / 17:00 – 20:00<br>
+            Sábados: 10:00 – 14:00<br>
+            Domingos y festivos: consultar.
+          </p>
+        </div>
+        <div class="info-bloque">
+          <h3>Contacto directo</h3>
+          <p>
+            Teléfono / WhatsApp: <strong><a href="https://wa.me/34661099782" target="_blank" rel="noopener noreferrer">34 661 09 97 82</a></strong><br>
+            Email: <strong><a href="mailto:01elrincondemamaines@gmail.com">01elrincondemamaines@gmail.com</a></strong>
+          </p>
+        </div>
+
+        <div class="info-bloque">
+          <h3>Cómo llegar</h3>
+          <div class="mapa">
+            <!-- Sustituye la URL del iframe por el mapa real de tu negocio -->
+            <iframe
+              src="https://www.google.com/maps?q=El+Rinc%C3%B3n+de+mama+In%C3%A9s@40.5486016,-3.6461236&hl=es&z=18&output=embed"
+              loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+          </div>
+        </div>
+
+        <div class="info-bloque">
+          <h3>Redes sociales</h3>
+          <div class="rrss">
+            <a href="https://www.instagram.com/el_rincon_de_mama_ines?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" target="_blank" rel="noopener noreferrer" aria-label="Instagram" title="Instagram">
+              <!-- Instagram SVG -->
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                <path d="M7 2h10a5 5 0 0 1 5 5v10a5 5 0 0 1-5 5H7a5 5 0 0 1-5-5V7a5 5 0 0 1 5-5z" fill="#E4405F"/>
+                <path d="M12 7.2a4.8 4.8 0 1 0 0 9.6 4.8 4.8 0 0 0 0-9.6zm0 1.6a3.2 3.2 0 1 1 0 6.4 3.2 3.2 0 0 1 0-6.4z" fill="#fff"/>
+                <circle cx="17.5" cy="6.5" r="0.9" fill="#fff"/>
+              </svg>
+            </a>
+
+            <a href="https://wa.me/34661099782" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp" title="WhatsApp - 34 661 09 97 82">
+              <!-- WhatsApp SVG -->
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                <path d="M20.52 3.48A11.94 11.94 0 0 0 12 0C5.373 0 .02 5.353.02 12.0c0 2.116.55 4.17 1.6 5.98L0 24l6.3-1.66A11.94 11.94 0 0 0 12 24c6.627 0 12-5.373 12-12 0-1.94-.44-3.78-1.48-5.52z" fill="#25D366"/>
+                <path d="M17.2 14.3c-.3-.15-1.8-.9-2.1-.98-.3-.08-.52-.16-.75.15-.24.3-.9.98-1.1 1.18-.2.2-.38.24-.7.08-.3-.16-1.22-.45-2.33-1.43-.86-.77-1.44-1.72-1.61-2.02-.17-.3-.02-.46.13-.62.15-.15.33-.38.5-.57.16-.2.22-.34.33-.56.1-.2.05-.4-.02-.57-.08-.16-.75-1.8-1.03-2.47-.27-.65-.55-.56-.75-.57-.2-.01-.43-.01-.66-.01-.24 0-.63.09-.96.4-.33.31-1.24 1.21-1.24 2.95 0 1.74 1.27 3.43 1.44 3.67.17.24 2.48 3.87 6.02 5.42 3.54 1.56 3.54 1.04 4.18.98.64-.06 2.08-.85 2.38-1.68.3-.84.3-1.57.21-1.72-.09-.15-.33-.24-.66-.39z" fill="#fff"/>
+              </svg>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+
+  <footer>
+    © <span id="year"></span> El  Rincón De Mamá Inés. Todos los derechos reservados.
+  </footer>
+
+  <!-- Stripe (cliente) -->
+  <script src="https://js.stripe.com/v3/"></script>
+
+  <!-- EmailJS (cliente) -->
+  <script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
+
+  <script>
+    // Inicializar Stripe una sola vez desde el servidor
+    let stripe = null;
+    let stripeReady = false;
+    
+    const initializeStripe = fetch('/api/config')
+      .then(res => res.json())
+      .then(cfg => {
+        if (!cfg.publishableKey) {
+          throw new Error('No se pudo cargar la clave publica de Stripe');
+        }
+        stripe = Stripe(cfg.publishableKey);
+        stripeReady = true;
+        console.log('✓ Stripe inicializado correctamente');
+        return stripe;
+      })
+      .catch(err => {
+        console.error('Error al iniciar Stripe:', err);
+        stripeReady = false;
+      });
+
+    // Sistema de Carrito
+    let carrito = JSON.parse(localStorage.getItem('carrito')) || [];
+
+    function guardarCarrito() {
+      localStorage.setItem('carrito', JSON.stringify(carrito));
+    }
+
+    function actualizarCarrito() {
+      const itemsCarrito = document.getElementById('itemsCarrito');
+      const btnCarrito = document.getElementById('btnCarrito');
+      const contadorCarrito = document.getElementById('contadorCarrito');
+      const totalCarrito = document.getElementById('totalCarrito');
+
+      // Actualizar contador
+      const totalItems = carrito.reduce((sum, item) => sum + item.cantidad, 0);
+      contadorCarrito.textContent = totalItems;
+
+      // Actualizar contenido del carrito
+      if (carrito.length === 0) {
+        itemsCarrito.innerHTML = '<div class="carrito-vacio">Tu cesta está vacía</div>';
+        totalCarrito.textContent = '0.00';
+      } else {
+        itemsCarrito.innerHTML = carrito.map((item, idx) => `
+          <div class="carrito-item">
+            <div class="carrito-item-info">
+              <div class="carrito-item-nombre">${item.producto}</div>
+              <div class="carrito-item-detalle">${item.tamaño} x ${item.cantidad}</div>
+            </div>
+            <div class="carrito-item-precio">${(item.precio * item.cantidad).toFixed(2)}€</div>
+            <button class="carrito-item-eliminar" onclick="eliminarDelCarrito(${idx})">×</button>
+          </div>
+        `).join('');
+
+        const total = carrito.reduce((sum, item) => sum + (item.precio * item.cantidad), 0);
+        totalCarrito.textContent = total.toFixed(2);
+      }
+    }
+
+    function agregarAlCarrito(producto, tamaño, precio, cantidad) {
+      const item = carrito.find(i => i.producto === producto && i.tamaño === tamaño);
+      if (item) {
+        item.cantidad += cantidad;
+      } else {
+        carrito.push({ producto, tamaño, precio, cantidad });
+      }
+      guardarCarrito();
+      actualizarCarrito();
+      // Mostrar confirmación
+      const carritoModal = document.getElementById('carritoModal');
+      carritoModal.classList.add('activo');
+      setTimeout(() => {
+        carritoModal.classList.remove('activo');
+      }, 2000);
+    }
+
+    function eliminarDelCarrito(idx) {
+      carrito.splice(idx, 1);
+      guardarCarrito();
+      actualizarCarrito();
+    }
+
+    // Event listeners para botones agregar
+    document.addEventListener('click', (e) => {
+      if (e.target.classList.contains('btn-agregar')) {
+        const card = e.target.closest('.menu-card');
+        const selector = card.querySelector('.selector-tamaño');
+        const cantidad = parseInt(card.querySelector('.cantidad-input').value);
+        const precios = selector.dataset.precios.split('|').map(Number);
+        const indice = parseInt(selector.value);
+        const tamaño = selector.options[indice].text;
+        const precio = precios[indice];
+        const producto = e.target.dataset.producto;
+
+        agregarAlCarrito(producto, tamaño, precio, cantidad);
+      }
+    });
+
+    // Toggle carrito modal
+    document.getElementById('btnCarrito').addEventListener('click', (e) => {
+      e.stopPropagation();
+      const carritoModal = document.getElementById('carritoModal');
+      carritoModal.classList.toggle('activo');
+    });
+
+    // Cerrar carrito al hacer clic fuera
+    document.addEventListener('click', (e) => {
+      const carritoModal = document.getElementById('carritoModal');
+      const btnCarrito = document.getElementById('btnCarrito');
+      if (!carritoModal.contains(e.target) && !btnCarrito.contains(e.target)) {
+        carritoModal.classList.remove('activo');
+      }
+    });
+
+    // Botón hacer pedido — integración STRIPE
+    document.getElementById('btnPedido').addEventListener('click', async () => {
+      if (carrito.length === 0) {
+        alert('Tu cesta está vacía');
+        return;
+      }
+
+      // Esperar a que Stripe esté listo
+      if (!stripeReady) {
+        alert('Stripe se está inicializando... Espera un momento y prueba de nuevo.');
+        console.log('Esperando a que Stripe esté listo...');
+        try {
+          await initializeStripe;
+        } catch (err) {
+          console.error('Error esperando Stripe:', err);
+          alert('Error al inicializar Stripe. Por favor, recarga la página.');
+          return;
+        }
+      }
+
+      // Transformar carrito al formato que Stripe espera
+      const items = carrito.map(item => ({
+        name: `${item.producto} (${item.tamaño})`,
+        price: Math.round(item.precio * 100), // Precio en céntimos
+        quantity: item.cantidad
+      }));
+
+      if (!stripe) {
+        alert('Stripe no se pudo inicializar. Por favor, recarga la página.');
+        return;
+      }
+
+      // Enviar solicitud al servidor para crear sesión de Stripe
+      fetch('/api/create-checkout-session', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ items })
+      })
+      .then(res => res.json())
+      .then(data => {
+        console.log('Respuesta del servidor:', data);
+        if (data.id) {
+          // Usar stripe.redirectToCheckout con sessionId
+          console.log('Redirigiendo a Stripe Checkout...');
+          return stripe.redirectToCheckout({ sessionId: data.id });
+        } else {
+          throw new Error(data.error || 'No se pudo crear sesión');
+        }
+      })
+      .then(result => {
+        // Si hay error en la redirección
+        if (result && result.error) {
+          console.error('Error de Stripe:', result.error);
+          alert('Error: ' + result.error.message);
+        }
+      })
+      .catch(err => {
+        console.error('Error en pago:', err);
+        alert('Error: ' + err.message);
+      });
+    });
+
+    // Tabs de carta
+    const tabButtons = document.querySelectorAll('.tab-btn');
+    const tabs = {
+      roscones: document.getElementById('tab-roscones'),
+      tartas: document.getElementById('tab-tartas'),
+      temporada: document.getElementById('tab-temporada')
+    };
+
+    tabButtons.forEach(btn => {
+      btn.addEventListener('click', () => {
+        tabButtons.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+
+        Object.values(tabs).forEach(tab => tab.style.display = 'none');
+        const seleccion = btn.dataset.tab;
+        tabs[seleccion].style.display = 'block';
+      });
+    });
+
+    // Animaciones de aparición suave
+    const observador = new IntersectionObserver((entradas) => {
+      entradas.forEach(e => {
+        if (e.isIntersecting) {
+          e.target.classList.add('visible');
+        }
+      });
+    }, { threshold: 0.15 });
+
+    document.querySelectorAll('.fade-up').forEach(el => observador.observe(el));
+
+    // Año actual en el footer
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    // Manejo del formulario: enviar pedido por EmailJS
+    document.getElementById('pedidoForm').addEventListener('submit', (e) => {
+      e.preventDefault();
+      const form = e.target;
+      const nombre = form.nombre.value.trim();
+      const email = form.email.value.trim();
+      const telefono = form.telefono.value.trim();
+      const descripcion = form.descripcion.value.trim();
+
+      if (!email || !nombre) {
+        alert('Por favor, completa tu nombre y correo.');
+        return;
+      }
+
+      const carritoResumen = carrito.length ? carrito.map(item => `${item.producto} (${item.tamaño}) x${item.cantidad} — ${(item.precio * item.cantidad).toFixed(2)}€`).join('\n') : 'Cesta vacía';
+      const total = carrito.reduce((sum, item) => sum + (item.precio * item.cantidad), 0).toFixed(2);
+      const totalItems = carrito.reduce((sum, item) => sum + item.cantidad, 0);
+      const ahora = new Date().toLocaleString('es-ES');
+
+      const templateParams = {
+        fecha_pedido: ahora,
+        cliente_nombre: nombre,
+        cliente_email: email,
+        cliente_telefono: telefono,
+        cliente_comentarios: descripcion,
+        total_items: totalItems,
+        detalles_pedido: carritoResumen,
+        total: total,
+        mensaje: 'Nuevo pedido recibido desde el formulario de contacto'
+      };
+
+      // Inicializa EmailJS (sustituye 'TU_PUBLIC_KEY' por tu clave pública)
+      try {
+        emailjs.init('TqpGS2g8D8-boYYkk4');
+      } catch (err) {
+        console.warn('EmailJS init:', err);
+      }
+
+      // Envía el email (sustituye 'TU_SERVICE_ID' y 'TU_TEMPLATE_ID')
+      emailjs.send('service_kh8hj9j', 'template_1wxoraq', templateParams)
+        .then(() => {
+          alert('Pedido enviado correctamente. Te contactaremos para confirmar.');
+          form.reset();
+          carrito = [];
+          guardarCarrito();
+          actualizarCarrito();
+        }, (error) => {
+          console.error('Error EmailJS:', error);
+          alert('No se pudo enviar el pedido. Inténtalo más tarde o contacta por teléfono.');
+        });
+    });
+
+    /* Carrusel: lógica simple (autoplay, controles, pausa al hover) */
+    (function(){
+      const carousel = document.querySelector('.carousel');
+      if (!carousel) return;
+      const slidesWrap = carousel.querySelector('.slides');
+      const slides = Array.from(carousel.querySelectorAll('.slide'));
+      const prev = carousel.querySelector('.carousel-control.prev');
+      const next = carousel.querySelector('.carousel-control.next');
+      const dotsWrap = carousel.querySelector('.carousel-dots');
+      let index = 0;
+      let interval = null;
+
+      function renderDots(){
+        dotsWrap.innerHTML = '';
+        slides.forEach((s, i)=>{
+          const btn = document.createElement('button');
+          if(i===0) btn.classList.add('active');
+          btn.addEventListener('click', ()=> goTo(i));
+          dotsWrap.appendChild(btn);
+        });
+      }
+
+      function update(){
+        slidesWrap.style.transform = `translateX(-${index*100}%)`;
+        Array.from(dotsWrap.children).forEach((d,i)=> d.classList.toggle('active', i===index));
+        // pause videos in non-active slides and play video in active slide (muted)
+        slides.forEach((s,i)=>{
+          const v = s.querySelector('video');
+          if(!v) return;
+          if(i===index){
+            // try to play the video when the slide is active
+            v.muted = true;
+            v.play().catch(() => {});
+          } else {
+            try { v.pause(); } catch(e) {}
+            try { v.currentTime = 0; } catch(e) {}
+          }
+        });
+      }
+
+      function prevSlide(){ index = (index-1+slides.length)%slides.length; update(); }
+      function nextSlide(){ index = (index+1)%slides.length; update(); }
+      function goTo(i){ index = i; update(); }
+
+      prev.addEventListener('click', ()=>{ prevSlide(); resetInterval(); });
+      next.addEventListener('click', ()=>{ nextSlide(); resetInterval(); });
+
+      function startInterval(){ interval = setInterval(()=>{ nextSlide(); }, 4000); }
+      function stopInterval(){ if(interval) { clearInterval(interval); interval = null; } }
+      function resetInterval(){ stopInterval(); startInterval(); }
+
+      carousel.addEventListener('mouseenter', stopInterval);
+      carousel.addEventListener('mouseleave', startInterval);
+
+      renderDots();
+      update();
+      startInterval();
+    })();
+
+    // Inicializar carrito
+    actualizarCarrito();
+  </script>
+</body>
+</html>
+
