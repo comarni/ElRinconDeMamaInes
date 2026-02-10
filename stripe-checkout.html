@@ -1,0 +1,54 @@
+<!-- INTEGRACIÓN STRIPE - Agregar esto en el <head> -->
+<script src="https://js.stripe.com/v3/"></script>
+
+<!-- MODIFICAR: Cambiar el botón "Hacer pedido" en el carrito flotante por esto: -->
+<!-- En lugar de: <button class="btn" id="btnPedido" style="width: 100%; margin-top: 1rem;">Hacer pedido</button> -->
+<!-- Usar: -->
+<button class="btn" id="btnStripe" style="width: 100%; margin-top: 1rem;">Pagar con Stripe</button>
+
+<!-- AGREGAR este script al final, antes del cierre de </body> -->
+<script>
+  // Configuración de Stripe
+  const stripe = Stripe('pk_test_51SyEMJ2MlHWgQOvpBCKr1fGH08NAydCzxs3RJQsu8YNiQVhllu8nB8sN1YTWBYwXZ3uqoT0FoaQOr29jWqHoXHVV00X');
+  
+  document.getElementById('btnStripe').addEventListener('click', async () => {
+    if (carrito.length === 0) {
+      alert('Tu cesta está vacía');
+      return;
+    }
+
+    // Convertir carrito a formato para Stripe
+    const items = carrito.map(item => ({
+      name: item.producto,
+      description: item.tamaño,
+      amount: Math.round(item.precio * 100), // Convertir a centavos
+      currency: 'eur',
+      quantity: item.cantidad
+    }));
+
+    try {
+      // Enviar datos al backend para crear sesión
+      const response = await fetch('/crear-sesion-stripe', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          items: items,
+          total: carrito.reduce((sum, item) => sum + (item.precio * item.cantidad), 0),
+          totalItems: carrito.reduce((sum, item) => sum + item.cantidad, 0)
+        })
+      });
+
+      const data = await response.json();
+      
+      if (data.sessionId) {
+        // Redirigir a Stripe Checkout
+        await stripe.redirectToCheckout({ sessionId: data.sessionId });
+      } else if (data.error) {
+        alert('Error: ' + data.error);
+      }
+    } catch (error) {
+      console.error('Error:', error);
+      alert('No se pudo procesar el pago. Intenta de nuevo.');
+    }
+  });
+</script>
