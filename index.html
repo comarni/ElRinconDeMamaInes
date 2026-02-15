@@ -1198,7 +1198,7 @@ Hace unos cicno años, me atreví a cobrar por primera vez por una tarta... y de
 
   <script>
     // Webhook de n8n para crear el pago en Stripe
-    const N8N_CHECKOUT_WEBHOOK = 'https://n8n.srv1369665.hstgr.cloud/webhook-test/f1ab3ed2-8a44-459d-9e2d-9447520b28ce';
+    const N8N_CHECKOUT_WEBHOOK = 'https://n8n.srv1369665.hstgr.cloud/webhook/f1ab3ed2-8a44-459d-9e2d-9447520b28ce';
 
     // Sistema de Carrito
     let carrito = JSON.parse(localStorage.getItem('carrito')) || [];
@@ -1365,8 +1365,8 @@ Hace unos cicno años, me atreví a cobrar por primera vez por una tarta... y de
     // Año actual en el footer
     document.getElementById('year').textContent = new Date().getFullYear();
 
-    // Manejo del formulario: enviar pedido por EmailJS
-    document.getElementById('pedidoForm').addEventListener('submit', (e) => {
+    // Manejo del formulario: enviar pedido por EmailJS (sin abrir cliente de correo)
+    document.getElementById('pedidoForm').addEventListener('submit', async (e) => {
       e.preventDefault();
       const form = e.target;
       const nombre = form.nombre.value.trim();
@@ -1379,42 +1379,35 @@ Hace unos cicno años, me atreví a cobrar por primera vez por una tarta... y de
         return;
       }
 
-      const carritoResumen = carrito.length ? carrito.map(item => `${item.producto} (${item.tamaño}) x${item.cantidad} — ${(item.precio * item.cantidad).toFixed(2)}€`).join('\n') : 'Cesta vacía';
-      const total = carrito.reduce((sum, item) => sum + (item.precio * item.cantidad), 0).toFixed(2);
-      const totalItems = carrito.reduce((sum, item) => sum + item.cantidad, 0);
-      const ahora = new Date().toLocaleString('es-ES');
+      const btnSubmit = form.querySelector('button[type="submit"]');
+      if (btnSubmit) {
+        btnSubmit.disabled = true;
+        btnSubmit.textContent = 'Enviando...';
+      }
 
       const templateParams = {
-        fecha_pedido: ahora,
+        to_email: 'marcovonarana10@gmail.com',
         cliente_nombre: nombre,
         cliente_email: email,
         cliente_telefono: telefono,
         cliente_comentarios: descripcion,
-        total_items: totalItems,
-        detalles_pedido: carritoResumen,
-        total: total,
-        mensaje: 'Nuevo pedido recibido desde el formulario de contacto'
+        mensaje: `Email del cliente: ${email}\n\nDescripción:\n${descripcion}`
       };
 
-      // Inicializa EmailJS (sustituye 'TU_PUBLIC_KEY' por tu clave pública)
       try {
         emailjs.init('TqpGS2g8D8-boYYkk4');
-      } catch (err) {
-        console.warn('EmailJS init:', err);
+        await emailjs.send('service_kh8hj9j', 'template_1wxoraq', templateParams);
+        alert('Solicitud enviada correctamente.');
+        form.reset();
+      } catch (error) {
+        console.error('Error EmailJS:', error);
+        alert('No se pudo enviar la solicitud. Inténtalo más tarde.');
+      } finally {
+        if (btnSubmit) {
+          btnSubmit.disabled = false;
+          btnSubmit.innerHTML = 'Enviar solicitud <span>✉️</span>';
+        }
       }
-
-      // Envía el email (sustituye 'TU_SERVICE_ID' y 'TU_TEMPLATE_ID')
-      emailjs.send('service_kh8hj9j', 'template_1wxoraq', templateParams)
-        .then(() => {
-          alert('Pedido enviado correctamente. Te contactaremos para confirmar.');
-          form.reset();
-          carrito = [];
-          guardarCarrito();
-          actualizarCarrito();
-        }, (error) => {
-          console.error('Error EmailJS:', error);
-          alert('No se pudo enviar el pedido. Inténtalo más tarde o contacta por teléfono.');
-        });
     });
 
     /* Carrusel: lógica simple (autoplay, controles, pausa al hover) */
