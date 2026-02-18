@@ -109,7 +109,7 @@
     <div class="checkout-card">
       <h2>Datos para el pago y envío</h2>
       <p class="section-subtitle">Completa estos datos para continuar al pago.</p>
-      <p class="checkout-notice"><strong>Envíos solo en España peninsular.</strong> No realizamos envíos a Baleares, Canarias, Ceuta ni Melilla.</p>
+      <p class="checkout-notice"><strong>Envíos solo en España peninsular.</strong> También puedes elegir <strong>recogida en local</strong> (coste de envío 0€). No realizamos envíos a Baleares, Canarias, Ceuta ni Melilla.</p>
 
       <form id="checkoutForm">
         <div class="checkout-grid">
@@ -128,22 +128,30 @@
             <input type="tel" id="telefono" name="telefono" required />
           </div>
 
-          <div class="campo">
+          <div class="campo campo-span-2">
+            <label for="metodoEntrega">Método de entrega</label>
+            <select id="metodoEntrega" name="metodoEntrega" required>
+              <option value="envio_domicilio" selected>Envío a domicilio</option>
+              <option value="recogida_local">Recogida en el local (0€)</option>
+            </select>
+          </div>
+
+          <div class="campo campo-envio">
             <label for="codigoPostal">Código postal</label>
             <input type="text" id="codigoPostal" name="codigoPostal" pattern="[0-9]{5}" required />
           </div>
 
-          <div class="campo">
+          <div class="campo campo-envio">
             <label for="ciudad">Ciudad</label>
             <input type="text" id="ciudad" name="ciudad" required />
           </div>
 
-          <div class="campo">
+          <div class="campo campo-envio">
             <label for="comunidad">Comunidad autónoma (solo península)</label>
             <select id="comunidad" name="comunidad" required></select>
           </div>
 
-          <div class="campo">
+          <div class="campo campo-envio">
             <label for="provincia">Provincia (solo península)</label>
             <select id="provincia" name="provincia" required></select>
           </div>
@@ -158,7 +166,7 @@
             <input type="number" id="pesoKg" name="pesoKg" step="0.01" readonly />
           </div>
 
-          <div class="campo campo-span-2">
+          <div class="campo campo-span-2 campo-envio">
             <label for="direccionCompleta">Dirección completa de entrega</label>
             <textarea id="direccionCompleta" name="direccionCompleta" required></textarea>
           </div>
@@ -170,7 +178,7 @@
         </div>
 
         <p class="nota-form" id="costeEnvioInfo"></p>
-        <p class="nota-form">Envíos solo en península y con mínimo 4 días de antelación. Tartas personalizadas solo dentro de la Comunidad de Madrid.</p>
+        <p class="nota-form">Pedidos con mínimo 4 días de antelación. En envíos a domicilio: solo península. Tartas personalizadas a domicilio: solo dentro de la Comunidad de Madrid.</p>
 
         <div class="checkout-actions">
           <button type="submit" class="btn" id="btnContinuarPago">Continuar al pago</button>
@@ -195,6 +203,8 @@
   <script>
     const N8N_CHECKOUT_WEBHOOK = 'https://n8n.srv1369665.hstgr.cloud/webhook/f1ab3ed2-8a44-459d-9e2d-9447520b28ce';
     const ZONA_ENVIO = 'peninsula';
+    const METODO_ENTREGA_ENVIO = 'envio_domicilio';
+    const METODO_ENTREGA_RECOGIDA = 'recogida_local';
     const COSTE_ENVIO_COMUNIDAD_MADRID = 4;
     const COSTE_ENVIO_RESTO_PENINSULA = 7;
     const DIAS_MINIMOS_ANTELACION = 4;
@@ -306,6 +316,18 @@
     }
 
     function validarRestriccionesPedido(datosPedido) {
+      const fechaMinima = getFechaMinimaLlegada();
+      const fechaSeleccionada = new Date(datosPedido.fechaLlegada);
+      fechaSeleccionada.setHours(0, 0, 0, 0);
+      if (fechaSeleccionada < fechaMinima) {
+        alert(`Los pedidos deben pedirse con ${DIAS_MINIMOS_ANTELACION} días de antelación como mínimo.`);
+        return false;
+      }
+
+      if (datosPedido.metodoEntrega === METODO_ENTREGA_RECOGIDA) {
+        return true;
+      }
+
       if (!comunidadesPermitidas.includes(datosPedido.comunidad)) {
         alert('Selecciona una comunidad autónoma válida de España peninsular.');
         return false;
@@ -314,14 +336,6 @@
       const provinciasComunidad = COMUNIDADES_PENINSULA[datosPedido.comunidad] || [];
       if (!provinciasComunidad.includes(datosPedido.provincia)) {
         alert('Selecciona una provincia válida para la comunidad elegida.');
-        return false;
-      }
-
-      const fechaMinima = getFechaMinimaLlegada();
-      const fechaSeleccionada = new Date(datosPedido.fechaLlegada);
-      fechaSeleccionada.setHours(0, 0, 0, 0);
-      if (fechaSeleccionada < fechaMinima) {
-        alert(`Los envíos deben pedirse con ${DIAS_MINIMOS_ANTELACION} días de antelación como mínimo.`);
         return false;
       }
 
@@ -342,8 +356,10 @@
     const costeEnvioInfoEl = document.getElementById('costeEnvioInfo');
     const pesoKgInput = document.getElementById('pesoKg');
     const fechaLlegadaInput = document.getElementById('fechaLlegada');
+    const metodoEntregaSelect = document.getElementById('metodoEntrega');
     const comunidadSelect = document.getElementById('comunidad');
     const provinciaSelect = document.getElementById('provincia');
+    const camposSoloEnvio = Array.from(document.querySelectorAll('.campo-envio input, .campo-envio select, .campo-envio textarea'));
 
     if (!carrito.length) {
       alert('Tu cesta está vacía.');
@@ -378,25 +394,55 @@
     pesoTotalEl.textContent = pesoTotal.toFixed(2);
     pesoKgInput.value = pesoTotal.toFixed(2);
 
+    function actualizarCamposSegunMetodoEntrega() {
+      const esRecogida = metodoEntregaSelect.value === METODO_ENTREGA_RECOGIDA;
+      camposSoloEnvio.forEach((campo) => {
+        if (esRecogida) {
+          campo.disabled = true;
+          campo.required = false;
+        } else {
+          campo.disabled = false;
+          campo.required = ['codigoPostal', 'ciudad', 'comunidad', 'provincia', 'direccionCompleta'].includes(campo.id);
+        }
+      });
+    }
+
     function actualizarResumenCostes() {
+      const esRecogida = metodoEntregaSelect.value === METODO_ENTREGA_RECOGIDA;
       const comunidad = comunidadSelect.value;
       const provincia = provinciaSelect.value;
-      costeEnvio = calcularCosteEnvio(comunidad, provincia);
+
+      if (esRecogida) {
+        costeEnvio = 0;
+      } else {
+        costeEnvio = calcularCosteEnvio(comunidad, provincia);
+      }
+
       totalPedido = Number((totalProductos + costeEnvio).toFixed(2));
 
       costeEnvioEl.textContent = costeEnvio.toFixed(2);
       totalPedidoEl.textContent = totalPedido.toFixed(2);
-      costeEnvioInfoEl.textContent = esComunidadMadrid(comunidad, provincia)
-        ? `Coste de envío: ${COSTE_ENVIO_COMUNIDAD_MADRID.toFixed(2)}€ (dentro de la Comunidad de Madrid).`
-        : `Coste de envío: ${COSTE_ENVIO_RESTO_PENINSULA.toFixed(2)}€ (resto de España peninsular).`;
+
+      if (esRecogida) {
+        costeEnvioInfoEl.textContent = 'Coste de envío: 0.00€ (recogida en el local).';
+      } else {
+        costeEnvioInfoEl.textContent = esComunidadMadrid(comunidad, provincia)
+          ? `Coste de envío: ${COSTE_ENVIO_COMUNIDAD_MADRID.toFixed(2)}€ (dentro de la Comunidad de Madrid).`
+          : `Coste de envío: ${COSTE_ENVIO_RESTO_PENINSULA.toFixed(2)}€ (resto de España peninsular).`;
+      }
     }
 
     poblarComunidades();
+    metodoEntregaSelect.addEventListener('change', () => {
+      actualizarCamposSegunMetodoEntrega();
+      actualizarResumenCostes();
+    });
     comunidadSelect.addEventListener('change', () => {
       poblarProvincias(comunidadSelect.value);
       actualizarResumenCostes();
     });
     provinciaSelect.addEventListener('change', actualizarResumenCostes);
+    actualizarCamposSegunMetodoEntrega();
     actualizarResumenCostes();
 
     const fechaMinima = getFechaMinimaLlegada();
@@ -415,7 +461,8 @@
         nombre: form.nombre.value.trim(),
         email: form.email.value.trim(),
         telefono: form.telefono.value.trim(),
-        zonaEnvio: ZONA_ENVIO,
+        metodoEntrega: form.metodoEntrega.value,
+        zonaEnvio: form.metodoEntrega.value === METODO_ENTREGA_RECOGIDA ? METODO_ENTREGA_RECOGIDA : ZONA_ENVIO,
         direccionCompleta: form.direccionCompleta.value.trim(),
         codigoPostal: form.codigoPostal.value.trim(),
         ciudad: form.ciudad.value.trim(),
