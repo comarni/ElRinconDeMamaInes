@@ -1,0 +1,479 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Checkout - El Rincón De Mamá Inés</title>
+  <link rel="stylesheet" href="styles.css" />
+  <style>
+    .checkout-wrapper {
+      max-width: 980px;
+      margin: 1rem auto;
+      padding: 0 1rem;
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 1rem;
+    }
+
+    .checkout-card {
+      background: var(--blanco, #fff);
+      border-radius: 12px;
+      padding: 1rem;
+      box-shadow: var(--sombra-suave, 0 8px 24px rgba(0, 0, 0, 0.08));
+      border: 1px solid rgba(0,0,0,0.05);
+    }
+
+    .checkout-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: .65rem .8rem;
+    }
+
+    .checkout-grid .campo {
+      margin: 0;
+    }
+
+    .campo-span-2 {
+      grid-column: 1 / -1;
+    }
+
+    .checkout-card .campo label {
+      font-size: .88rem;
+      margin-bottom: .2rem;
+      display: inline-block;
+    }
+
+    .checkout-card .campo input,
+    .checkout-card .campo select,
+    .checkout-card .campo textarea {
+      padding: .52rem .62rem;
+      border-radius: 10px;
+      font-size: .94rem;
+    }
+
+    .checkout-card .campo textarea {
+      min-height: 84px;
+    }
+
+    .checkout-notice {
+      margin: .25rem 0 .35rem;
+      padding: .6rem .75rem;
+      border-radius: 10px;
+      border: 1px solid rgba(0,0,0,.12);
+      background: var(--crema, #fff8f3);
+      font-size: .9rem;
+      line-height: 1.35;
+    }
+
+    .checkout-resumen-item {
+      display: flex;
+      justify-content: space-between;
+      gap: 1rem;
+      padding: .4rem 0;
+      border-bottom: 1px dashed rgba(0,0,0,.12);
+      font-size: .95rem;
+    }
+
+    .checkout-resumen-item:last-child { border-bottom: none; }
+
+    .checkout-totales {
+      margin-top: .9rem;
+      padding-top: .9rem;
+      border-top: 1px solid rgba(0,0,0,.12);
+    }
+
+    .checkout-totales p { margin: .35rem 0; }
+
+    .checkout-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: .8rem;
+      margin-top: 1rem;
+    }
+
+    .checkout-help {
+      margin-top: .6rem;
+      font-size: .92rem;
+      opacity: .85;
+    }
+
+    @media (max-width: 760px) {
+      .checkout-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <section class="checkout-wrapper">
+    <div class="checkout-card">
+      <h2>Datos para el pago y envío</h2>
+      <p class="section-subtitle">Completa estos datos para continuar al pago.</p>
+      <p class="checkout-notice"><strong>Envíos solo en España peninsular.</strong> No realizamos envíos a Baleares, Canarias, Ceuta ni Melilla.</p>
+
+      <form id="checkoutForm">
+        <div class="checkout-grid">
+          <div class="campo campo-span-2">
+            <label for="nombre">Nombre completo</label>
+            <input type="text" id="nombre" name="nombre" required />
+          </div>
+
+          <div class="campo">
+            <label for="email">Correo electrónico</label>
+            <input type="email" id="email" name="email" required />
+          </div>
+
+          <div class="campo">
+            <label for="telefono">Teléfono</label>
+            <input type="tel" id="telefono" name="telefono" required />
+          </div>
+
+          <div class="campo">
+            <label for="codigoPostal">Código postal</label>
+            <input type="text" id="codigoPostal" name="codigoPostal" pattern="[0-9]{5}" required />
+          </div>
+
+          <div class="campo">
+            <label for="ciudad">Ciudad</label>
+            <input type="text" id="ciudad" name="ciudad" required />
+          </div>
+
+          <div class="campo">
+            <label for="comunidad">Comunidad autónoma (solo península)</label>
+            <select id="comunidad" name="comunidad" required></select>
+          </div>
+
+          <div class="campo">
+            <label for="provincia">Provincia (solo península)</label>
+            <select id="provincia" name="provincia" required></select>
+          </div>
+
+          <div class="campo">
+            <label for="fechaLlegada">Fecha de llegada del pedido</label>
+            <input type="date" id="fechaLlegada" name="fechaLlegada" required />
+          </div>
+
+          <div class="campo">
+            <label for="pesoKg">Peso del pedido (kg)</label>
+            <input type="number" id="pesoKg" name="pesoKg" step="0.01" readonly />
+          </div>
+
+          <div class="campo campo-span-2">
+            <label for="direccionCompleta">Dirección completa de entrega</label>
+            <textarea id="direccionCompleta" name="direccionCompleta" required></textarea>
+          </div>
+
+          <div class="campo campo-span-2">
+            <label for="descripcion">Notas del pedido</label>
+            <textarea id="descripcion" name="descripcion" placeholder="Sabores, alergias, indicaciones adicionales..."></textarea>
+          </div>
+        </div>
+
+        <p class="nota-form" id="costeEnvioInfo"></p>
+        <p class="nota-form">Envíos solo en península y con mínimo 4 días de antelación. Tartas personalizadas solo dentro de la Comunidad de Madrid.</p>
+
+        <div class="checkout-actions">
+          <button type="submit" class="btn" id="btnContinuarPago">Continuar al pago</button>
+          <a href="index.html" class="btn btn-outline">Volver a la carta</a>
+        </div>
+      </form>
+    </div>
+
+    <div class="checkout-card">
+      <h3>Resumen del carrito</h3>
+      <div id="checkoutResumen"></div>
+      <div class="checkout-totales">
+        <p><strong>Total productos:</strong> <span id="totalProductos">0.00</span>€</p>
+        <p><strong>Peso total:</strong> <span id="pesoTotal">0.00</span> kg</p>
+        <p><strong>Envío:</strong> <span id="costeEnvio">0.00</span>€</p>
+        <p><strong>Total pedido:</strong> <span id="totalPedido">0.00</span>€</p>
+      </div>
+      <p class="checkout-help">El peso se calcula automáticamente desde los productos y cantidades del carrito.</p>
+    </div>
+  </section>
+
+  <script>
+    const N8N_CHECKOUT_WEBHOOK = 'https://n8n.srv1369665.hstgr.cloud/webhook-test/f1ab3ed2-8a44-459d-9e2d-9447520b28ce';
+    const ZONA_ENVIO = 'peninsula';
+    const COSTE_ENVIO_COMUNIDAD_MADRID = 4;
+    const COSTE_ENVIO_RESTO_PENINSULA = 7;
+    const DIAS_MINIMOS_ANTELACION = 4;
+    const EMAIL_PROPIETARIO = 'marcovonarana10@gmail.com';
+    const COMUNIDADES_PENINSULA = {
+      'Andalucía': ['Almería', 'Cádiz', 'Córdoba', 'Granada', 'Huelva', 'Jaén', 'Málaga', 'Sevilla'],
+      'Aragón': ['Huesca', 'Teruel', 'Zaragoza'],
+      'Asturias': ['Asturias'],
+      'Cantabria': ['Cantabria'],
+      'Castilla-La Mancha': ['Albacete', 'Ciudad Real', 'Cuenca', 'Guadalajara', 'Toledo'],
+      'Castilla y León': ['Ávila', 'Burgos', 'León', 'Palencia', 'Salamanca', 'Segovia', 'Soria', 'Valladolid', 'Zamora'],
+      'Cataluña': ['Barcelona', 'Girona', 'Lleida', 'Tarragona'],
+      'Comunidad de Madrid': ['Madrid'],
+      'Comunidad Foral de Navarra': ['Navarra'],
+      'Comunitat Valenciana': ['Alicante', 'Castellón', 'Valencia'],
+      'Extremadura': ['Badajoz', 'Cáceres'],
+      'Galicia': ['A Coruña', 'Lugo', 'Ourense', 'Pontevedra'],
+      'La Rioja': ['La Rioja'],
+      'País Vasco': ['Álava', 'Gipuzkoa', 'Bizkaia'],
+      'Región de Murcia': ['Murcia']
+    };
+
+    function extraerPesoKgDesdeTextoTamaño(textoTamaño) {
+      const texto = String(textoTamaño || '').toLowerCase();
+
+      const coincidenciaKg = texto.match(/(\d+(?:[\.,]\d+)?)\s*kg/);
+      if (coincidenciaKg) {
+        return parseFloat(coincidenciaKg[1].replace(',', '.'));
+      }
+
+      const coincidenciaGr = texto.match(/(\d+(?:[\.,]\d+)?)\s*g/);
+      if (coincidenciaGr) {
+        return parseFloat(coincidenciaGr[1].replace(',', '.')) / 1000;
+      }
+
+      const coincidenciaRaciones = texto.match(/(\d+)\s*[-–]\s*(\d+)\s*raciones?/);
+      if (coincidenciaRaciones) {
+        const min = parseInt(coincidenciaRaciones[1], 10);
+        const max = parseInt(coincidenciaRaciones[2], 10);
+        const mediaRaciones = (min + max) / 2;
+        return Number((mediaRaciones * 0.12).toFixed(2));
+      }
+
+      if (texto.includes('porcion') || texto.includes('porción')) {
+        return 0.12;
+      }
+
+      return 1;
+    }
+
+    function normalizarTexto(texto) {
+      return String(texto || '').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '').trim();
+    }
+
+    function esComunidadMadrid(comunidad, provincia) {
+      return normalizarTexto(comunidad) === 'comunidad de madrid' || normalizarTexto(provincia) === 'madrid';
+    }
+
+    function calcularCosteEnvio(comunidad, provincia) {
+      return esComunidadMadrid(comunidad, provincia)
+        ? COSTE_ENVIO_COMUNIDAD_MADRID
+        : COSTE_ENVIO_RESTO_PENINSULA;
+    }
+
+    function getFechaMinimaLlegada() {
+      const fechaMin = new Date();
+      fechaMin.setHours(0, 0, 0, 0);
+      fechaMin.setDate(fechaMin.getDate() + DIAS_MINIMOS_ANTELACION);
+      return fechaMin;
+    }
+
+    const comunidadesPermitidas = Object.keys(COMUNIDADES_PENINSULA);
+
+    function poblarComunidades() {
+      const comunidadSelect = document.getElementById('comunidad');
+      comunidadSelect.innerHTML = '<option value="" selected disabled>Selecciona comunidad</option>';
+
+      comunidadesPermitidas.forEach((comunidad) => {
+        const option = document.createElement('option');
+        option.value = comunidad;
+        option.textContent = comunidad;
+        comunidadSelect.appendChild(option);
+      });
+    }
+
+    function poblarProvincias(comunidad) {
+      const provinciaSelect = document.getElementById('provincia');
+      provinciaSelect.innerHTML = '<option value="" selected disabled>Selecciona provincia</option>';
+
+      const provincias = COMUNIDADES_PENINSULA[comunidad] || [];
+      provincias.forEach((provincia) => {
+        const option = document.createElement('option');
+        option.value = provincia;
+        option.textContent = provincia;
+        provinciaSelect.appendChild(option);
+      });
+    }
+
+    function detectarTipoPedido(carritoActual, descripcion) {
+      const descripcionNormalizada = String(descripcion || '').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '');
+      const nombresProductos = carritoActual.map((item) => String(item.producto || '').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, ''));
+
+      const hayPersonalizada = descripcionNormalizada.includes('personalizada') || nombresProductos.some((nombre) => nombre.includes('personalizada'));
+      if (hayPersonalizada) return 'tarta_personalizada';
+
+      if (nombresProductos.some((nombre) => nombre.includes('tarta'))) return 'tarta';
+      if (nombresProductos.some((nombre) => nombre.includes('roscon'))) return 'roscon';
+      return 'otro';
+    }
+
+    function validarRestriccionesPedido(datosPedido) {
+      if (!comunidadesPermitidas.includes(datosPedido.comunidad)) {
+        alert('Selecciona una comunidad autónoma válida de España peninsular.');
+        return false;
+      }
+
+      const provinciasComunidad = COMUNIDADES_PENINSULA[datosPedido.comunidad] || [];
+      if (!provinciasComunidad.includes(datosPedido.provincia)) {
+        alert('Selecciona una provincia válida para la comunidad elegida.');
+        return false;
+      }
+
+      const fechaMinima = getFechaMinimaLlegada();
+      const fechaSeleccionada = new Date(datosPedido.fechaLlegada);
+      fechaSeleccionada.setHours(0, 0, 0, 0);
+      if (fechaSeleccionada < fechaMinima) {
+        alert(`Los envíos deben pedirse con ${DIAS_MINIMOS_ANTELACION} días de antelación como mínimo.`);
+        return false;
+      }
+
+      if (datosPedido.tipoPedido === 'tarta_personalizada' && !esComunidadMadrid(datosPedido.comunidad, datosPedido.provincia)) {
+        alert('Las tartas personalizadas solo se envían dentro de la Comunidad de Madrid.');
+        return false;
+      }
+
+      return true;
+    }
+
+    const carrito = JSON.parse(localStorage.getItem('carrito')) || [];
+    const resumenEl = document.getElementById('checkoutResumen');
+    const totalProductosEl = document.getElementById('totalProductos');
+    const pesoTotalEl = document.getElementById('pesoTotal');
+    const costeEnvioEl = document.getElementById('costeEnvio');
+    const totalPedidoEl = document.getElementById('totalPedido');
+    const costeEnvioInfoEl = document.getElementById('costeEnvioInfo');
+    const pesoKgInput = document.getElementById('pesoKg');
+    const fechaLlegadaInput = document.getElementById('fechaLlegada');
+    const comunidadSelect = document.getElementById('comunidad');
+    const provinciaSelect = document.getElementById('provincia');
+
+    if (!carrito.length) {
+      alert('Tu cesta está vacía.');
+      window.location.href = 'index.html';
+    }
+
+    const totalProductos = carrito.reduce((sum, item) => sum + (item.precio * item.cantidad), 0);
+    const pesoTotal = carrito.reduce((sum, item) => {
+      const pesoUnitario = Number.isFinite(item.pesoKgUnitario)
+        ? Number(item.pesoKgUnitario)
+        : extraerPesoKgDesdeTextoTamaño(item.tamaño);
+      return sum + (pesoUnitario * item.cantidad);
+    }, 0);
+
+    let costeEnvio = COSTE_ENVIO_RESTO_PENINSULA;
+    let totalPedido = Number((totalProductos + costeEnvio).toFixed(2));
+
+    resumenEl.innerHTML = carrito.map((item) => {
+      const pesoUnitario = Number.isFinite(item.pesoKgUnitario)
+        ? Number(item.pesoKgUnitario)
+        : extraerPesoKgDesdeTextoTamaño(item.tamaño);
+      const pesoLinea = Number((pesoUnitario * item.cantidad).toFixed(2));
+      return `
+        <div class="checkout-resumen-item">
+          <span>${item.producto} (${item.tamaño}) x${item.cantidad}</span>
+          <span>${(item.precio * item.cantidad).toFixed(2)}€ · ${pesoLinea.toFixed(2)}kg</span>
+        </div>
+      `;
+    }).join('');
+
+    totalProductosEl.textContent = totalProductos.toFixed(2);
+    pesoTotalEl.textContent = pesoTotal.toFixed(2);
+    pesoKgInput.value = pesoTotal.toFixed(2);
+
+    function actualizarResumenCostes() {
+      const comunidad = comunidadSelect.value;
+      const provincia = provinciaSelect.value;
+      costeEnvio = calcularCosteEnvio(comunidad, provincia);
+      totalPedido = Number((totalProductos + costeEnvio).toFixed(2));
+
+      costeEnvioEl.textContent = costeEnvio.toFixed(2);
+      totalPedidoEl.textContent = totalPedido.toFixed(2);
+      costeEnvioInfoEl.textContent = esComunidadMadrid(comunidad, provincia)
+        ? `Coste de envío: ${COSTE_ENVIO_COMUNIDAD_MADRID.toFixed(2)}€ (dentro de la Comunidad de Madrid).`
+        : `Coste de envío: ${COSTE_ENVIO_RESTO_PENINSULA.toFixed(2)}€ (resto de España peninsular).`;
+    }
+
+    poblarComunidades();
+    comunidadSelect.addEventListener('change', () => {
+      poblarProvincias(comunidadSelect.value);
+      actualizarResumenCostes();
+    });
+    provinciaSelect.addEventListener('change', actualizarResumenCostes);
+    actualizarResumenCostes();
+
+    const fechaMinima = getFechaMinimaLlegada();
+    fechaLlegadaInput.min = fechaMinima.toISOString().split('T')[0];
+
+    document.getElementById('checkoutForm').addEventListener('submit', (e) => {
+      e.preventDefault();
+      const form = e.target;
+
+      if (!form.checkValidity()) {
+        form.reportValidity();
+        return;
+      }
+
+      const datosPedido = {
+        nombre: form.nombre.value.trim(),
+        email: form.email.value.trim(),
+        telefono: form.telefono.value.trim(),
+        zonaEnvio: ZONA_ENVIO,
+        direccionCompleta: form.direccionCompleta.value.trim(),
+        codigoPostal: form.codigoPostal.value.trim(),
+        ciudad: form.ciudad.value.trim(),
+        comunidad: form.comunidad.value,
+        provincia: form.provincia.value.trim(),
+        fechaLlegada: form.fechaLlegada.value,
+        pesoKg: Number(pesoTotal.toFixed(2)),
+        costeEnvio: Number(costeEnvio.toFixed(2)),
+        descripcion: form.descripcion.value.trim()
+      };
+
+      datosPedido.tipoPedido = detectarTipoPedido(carrito, datosPedido.descripcion);
+
+      if (!validarRestriccionesPedido(datosPedido)) {
+        return;
+      }
+
+      const descripcionCarrito = carrito
+        .map(item => `${item.producto} (${item.tamaño}) x${item.cantidad}`)
+        .join(', ');
+
+      const btn = document.getElementById('btnContinuarPago');
+      btn.disabled = true;
+      btn.textContent = 'Redirigiendo...';
+
+      const postForm = document.createElement('form');
+      postForm.method = 'POST';
+      postForm.action = N8N_CHECKOUT_WEBHOOK;
+      postForm.style.display = 'none';
+
+      const payload = {
+        producto: descripcionCarrito || 'Pedido desde carrito',
+        precio: totalPedido,
+        success_url: `${window.location.origin}/exito.html`,
+        cancel_url: `${window.location.origin}/cancelado.html`,
+        owner_email: EMAIL_PROPIETARIO,
+        ...datosPedido,
+        totalProductos: totalProductos.toFixed(2),
+        totalPedido: totalPedido.toFixed(2),
+        carrito: descripcionCarrito || 'Pedido desde carrito'
+      };
+
+      Object.entries(payload).forEach(([clave, valor]) => {
+        const input = document.createElement('input');
+        input.type = 'hidden';
+        input.name = clave;
+        input.value = String(valor ?? '');
+        postForm.appendChild(input);
+      });
+
+      localStorage.setItem('pendingOrderData', JSON.stringify({
+        ...payload,
+        createdAt: new Date().toISOString()
+      }));
+
+      document.body.appendChild(postForm);
+      postForm.submit();
+    });
+  </script>
+</body>
+</html>
