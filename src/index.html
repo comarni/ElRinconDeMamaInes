@@ -1150,33 +1150,10 @@
     © <span id="year"></span> El  Rincón De Mamá Inés. Todos los derechos reservados.
   </footer>
 
-  <!-- Stripe (cliente) -->
-  <script src="https://js.stripe.com/v3/"></script>
-
   <!-- EmailJS (cliente) -->
   <script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
 
   <script>
-    // Inicializar Stripe una sola vez desde el servidor
-    let stripe = null;
-    let stripeReady = false;
-    
-    const initializeStripe = fetch('/api/config')
-      .then(res => res.json())
-      .then(cfg => {
-        if (!cfg.publishableKey) {
-          throw new Error('No se pudo cargar la clave publica de Stripe');
-        }
-        stripe = Stripe(cfg.publishableKey);
-        stripeReady = true;
-        console.log('✓ Stripe inicializado correctamente');
-        return stripe;
-      })
-      .catch(err => {
-        console.error('Error al iniciar Stripe:', err);
-        stripeReady = false;
-      });
-
     // Sistema de Carrito
     let carrito = JSON.parse(localStorage.getItem('carrito')) || [];
 
@@ -1270,65 +1247,53 @@
       }
     });
 
-    // Botón hacer pedido — integración STRIPE
+    // Botón hacer pedido — genera enlace de pago vía n8n
     document.getElementById('btnPedido').addEventListener('click', async () => {
       if (carrito.length === 0) {
         alert('Tu cesta está vacía');
         return;
       }
 
-      // Esperar a que Stripe esté listo
-      if (!stripeReady) {
-        alert('Stripe se está inicializando... Espera un momento y prueba de nuevo.');
-        console.log('Esperando a que Stripe esté listo...');
-        try {
-          await initializeStripe;
-        } catch (err) {
-          console.error('Error esperando Stripe:', err);
-          alert('Error al inicializar Stripe. Por favor, recarga la página.');
-          return;
-        }
-      }
+      const total = carrito.reduce((sum, item) => sum + (item.precio * item.cantidad), 0);
+      const descripcionCarrito = carrito
+        .map(item => `${item.producto} (${item.tamaño}) x${item.cantidad}`)
+        .join(', ');
 
-      // Transformar carrito al formato que Stripe espera
-      const items = carrito.map(item => ({
-        name: `${item.producto} (${item.tamaño})`,
-        price: Math.round(item.precio * 100), // Precio en céntimos
-        quantity: item.cantidad
-      }));
+      const payload = {
+        carrito: carrito,
+        producto: descripcionCarrito,
+        total: total.toFixed(2),
+        success_url: `${window.location.origin}/exito.html`,
+        cancel_url: `${window.location.origin}/cancelado.html`
+      };
 
-      if (!stripe) {
-        alert('Stripe no se pudo inicializar. Por favor, recarga la página.');
-        return;
-      }
+      const btnPedido = document.getElementById('btnPedido');
+      btnPedido.disabled = true;
+      btnPedido.textContent = 'Procesando...';
 
-      // Enviar solicitud al servidor para crear sesión de Stripe
-      fetch('/api/create-checkout-session', {
+      fetch('https://n8n.srv1369665.hstgr.cloud/webhook-test/generar/enlace/pago', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ items })
+        body: JSON.stringify(payload)
       })
-      .then(res => res.json())
+      .then(res => {
+        if (!res.ok) throw new Error(`Error del servidor: ${res.status}`);
+        return res.json();
+      })
       .then(data => {
         console.log('Respuesta del servidor:', data);
-        if (data.id) {
-          // Usar stripe.redirectToCheckout con sessionId
-          console.log('Redirigiendo a Stripe Checkout...');
-          return stripe.redirectToCheckout({ sessionId: data.id });
+        const url = data.url || data.paymentUrl || data.payment_url || data.enlace;
+        if (url) {
+          window.location.href = url;
         } else {
-          throw new Error(data.error || 'No se pudo crear sesión');
-        }
-      })
-      .then(result => {
-        // Si hay error en la redirección
-        if (result && result.error) {
-          console.error('Error de Stripe:', result.error);
-          alert('Error: ' + result.error.message);
+          throw new Error(data.error || 'No se recibió enlace de pago');
         }
       })
       .catch(err => {
-        console.error('Error en pago:', err);
-        alert('Error: ' + err.message);
+        console.error('Error al generar enlace de pago:', err);
+        alert('Error al procesar el pago: ' + err.message);
+        btnPedido.disabled = false;
+        btnPedido.textContent = 'Hacer pedido';
       });
     });
 
