@@ -1150,33 +1150,10 @@
     © <span id="year"></span> El  Rincón De Mamá Inés. Todos los derechos reservados.
   </footer>
 
-  <!-- Stripe (cliente) -->
-  <script src="https://js.stripe.com/v3/"></script>
-
   <!-- EmailJS (cliente) -->
   <script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
 
   <script>
-    // Inicializar Stripe una sola vez desde el servidor
-    let stripe = null;
-    let stripeReady = false;
-    
-    const initializeStripe = fetch('/config')
-      .then(res => res.json())
-      .then(cfg => {
-        if (!cfg.publishableKey) {
-          throw new Error('No se pudo cargar la clave publica de Stripe');
-        }
-        stripe = Stripe(cfg.publishableKey);
-        stripeReady = true;
-        console.log('✓ Stripe inicializado correctamente');
-        return stripe;
-      })
-      .catch(err => {
-        console.error('Error al iniciar Stripe:', err);
-        stripeReady = false;
-      });
-
     // Sistema de Carrito
     let carrito = JSON.parse(localStorage.getItem('carrito')) || [];
 
@@ -1270,66 +1247,13 @@
       }
     });
 
-    // Botón hacer pedido — integración STRIPE
-    document.getElementById('btnPedido').addEventListener('click', async () => {
+    // Botón hacer pedido — redirige a la página de checkout
+    document.getElementById('btnPedido').addEventListener('click', () => {
       if (carrito.length === 0) {
         alert('Tu cesta está vacía');
         return;
       }
-
-      // Esperar a que Stripe esté listo
-      if (!stripeReady) {
-        alert('Stripe se está inicializando... Espera un momento y prueba de nuevo.');
-        console.log('Esperando a que Stripe esté listo...');
-        try {
-          await initializeStripe;
-        } catch (err) {
-          console.error('Error esperando Stripe:', err);
-          alert('Error al inicializar Stripe. Por favor, recarga la página.');
-          return;
-        }
-      }
-
-      // Transformar carrito al formato que Stripe espera
-      const items = carrito.map(item => ({
-        name: `${item.producto} (${item.tamaño})`,
-        price: Math.round(item.precio * 100), // Precio en céntimos
-        quantity: item.cantidad
-      }));
-
-      if (!stripe) {
-        alert('Stripe no se pudo inicializar. Por favor, recarga la página.');
-        return;
-      }
-
-      // Enviar solicitud al servidor para crear sesión de Stripe
-      fetch('/crear-sesion-stripe', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ items })
-      })
-      .then(res => res.json())
-      .then(data => {
-        console.log('Respuesta del servidor:', data);
-        if (data.sessionId) {
-          // Usar stripe.redirectToCheckout con sessionId
-          console.log('Redirigiendo a Stripe Checkout...');
-          return stripe.redirectToCheckout({ sessionId: data.sessionId });
-        } else {
-          throw new Error(data.error || 'No se pudo crear sesión');
-        }
-      })
-      .then(result => {
-        // Si hay error en la redirección
-        if (result && result.error) {
-          console.error('Error de Stripe:', result.error);
-          alert('Error: ' + result.error.message);
-        }
-      })
-      .catch(err => {
-        console.error('Error en pago:', err);
-        alert('Error: ' + err.message);
-      });
+      window.location.href = 'checkout.html';
     });
 
     // Tabs de carta
